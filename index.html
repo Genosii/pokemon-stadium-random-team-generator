@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generate random teams for Pokémon Stadium 1 & 2 with move compatibility">
+  <meta name="theme-color" content="#181818">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <title>Pokémon Stadium Team Generator</title>
+  <script src="js/randomize.js" defer></script>
+</head>
+<body>
+  <button id="sidebar-toggle" aria-label="Open navigation" class="hidden-on-landing">
+    <span class="hamburger"></span>
+  </button>
+
+  <!-- Keep the original sidebar -->
+  <div class="sidebar" role="navigation" aria-label="Game mode selection">
+    <img src="assets/stadium1.svg" alt="Pokémon Stadium 1 Logo" class="logo">
+    <nav>
+      <button class="nav-btn active" data-mode="s1Gym">Gym Leader Castle</button>
+      <button class="nav-btn" data-mode="s1Poke">Poké Cup</button>
+      <button class="nav-btn" data-mode="s1Prime">Prime Cup</button>
+      <button class="nav-btn" data-mode="s1Pika">Pika Cup</button>
+      <button class="nav-btn" data-mode="s1Petit">Petit Cup</button>
+    </nav>
+    <img src="assets/stadium2.png" alt="Pokémon Stadium 2 Logo" class="logo">
+    <nav>
+      <button class="nav-btn" data-mode="s2Gym">Gym Leader Castle</button>
+      <button class="nav-btn" data-mode="s2Poke">Poké Cup</button>
+      <button class="nav-btn" data-mode="s2Prime">Prime Cup</button>
+      <button class="nav-btn" data-mode="s2Challenge">Challenge Cup</button>
+      <button class="nav-btn" data-mode="s2Petit">Petit Cup</button>
+    </nav>
+  </div>
+  <div id="sidebar-overlay" role="presentation"></div>
+  <button id="sidebar-close" aria-label="Close navigation" style="display:none"></button>
+
+  <!-- Landing page content -->
+  <div id="landing-page" class="main-content">
+    <div class="title-row">
+      <h1>Which mode do you want to randomize a team for?</h1>
+    </div>
+    <div class="stadium-sections">
+      <div class="stadium-section">
+        <img src="assets/stadium1.svg" alt="Pokémon Stadium 1 Logo" class="logo">
+        <nav class="landing-nav">
+          <button class="nav-btn" data-mode="s1Gym">Gym Leader Castle</button>
+          <button class="nav-btn" data-mode="s1Poke">Poké Cup</button>
+          <button class="nav-btn" data-mode="s1Prime">Prime Cup</button>
+          <button class="nav-btn" data-mode="s1Pika">Pika Cup</button>
+          <button class="nav-btn" data-mode="s1Petit">Petit Cup</button>
+        </nav>
+      </div>
+      <div class="stadium-section">
+        <img src="assets/stadium2.png" alt="Pokémon Stadium 2 Logo" class="logo">
+        <nav class="landing-nav">
+          <button class="nav-btn" data-mode="s2Gym">Gym Leader Castle</button>
+          <button class="nav-btn" data-mode="s2Poke">Poké Cup</button>
+          <button class="nav-btn" data-mode="s2Prime">Prime Cup</button>
+          <button class="nav-btn" data-mode="s2Challenge">Challenge Cup</button>
+          <button class="nav-btn" data-mode="s2Petit">Petit Cup</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generator page content -->
+  <div id="generator-page" class="main-content hidden">
+    <div class="title-row">
+      <h1>Pokémon Stadium Team Generator</h1>
+      <span class="title-dash">–</span>
+      <h2 id="subtitle">Gym Leader Castle</h2>
+    </div>
+    <div class="teams">
+      <div class="team-section" id="fixed-team-section">
+        <div class="profile-name-container">
+          <button class="section-profile-btn" id="btn-fixed-team">Randomize Full Team</button>
+        </div>
+        <div class="cards" id="fixed-team"></div>
+      </div>
+      <div class="battle-team-section" id="battle-team-section">
+        <div class="profile-name-container">
+          <button class="section-profile-btn" id="btn-battle-team">Generate Battle Team</button>
+        </div>
+        <div class="cards" id="battle-team"></div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer-content" role="contentinfo">
+    Pokémon and all related names are trademarks of Nintendo, Game Freak, and The Pokémon Company. This tool is a fan project and is not affiliated with or endorsed by Nintendo or The Pokémon Company. <br/><br/> 3D models are hosted on <a href="https://bluemoonfalls.com/pages/general/stadium-gif-archive">Blue Moon Falls</a>. <!-- <br/><br/> Tool is made by Genosii. -->
+  </footer>
+</body>
+</html>

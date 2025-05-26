@@ -1,0 +1,1023 @@
+{
+    "moveTypes": {
+        "amnesia": {
+            "display": "Amnesia",
+            "type": "Psychic"
+        },
+        "bide": {
+            "display": "Bide",
+            "type": "Normal"
+        },
+        "bind": {
+            "display": "Bind",
+            "type": "Normal"
+        },
+        "bodyslam": {
+            "display": "Body Slam",
+            "type": "Normal"
+        },
+        "cut": {
+            "display": "Cut",
+            "type": "Normal"
+        },
+        "crabhammer": {
+            "display": "Crabhammer",
+            "type": "Water"
+        },
+        "defensecurl": {
+            "display": "Defense Curl",
+            "type": "Normal"
+        },
+        "doubleteam": {
+            "display": "Double Team",
+            "type": "Normal"
+        },
+        "flash": {
+            "display": "Flash",
+            "type": "Normal"
+        },
+        "growl": {
+            "display": "Growl",
+            "type": "Normal"
+        },
+        "growth": {
+            "display": "Growth",
+            "type": "Grass"
+        },
+        "headbutt": {
+            "display": "Headbutt",
+            "type": "Normal"
+        },
+        "leechseed": {
+            "display": "Leech Seed",
+            "type": "Grass"
+        },
+        "leechlife": {
+            "display": "Leech Life",
+            "type": "Bug"
+        },
+        "lightscreen": {
+            "display": "Light Screen",
+            "type": "Psychic"
+        },
+        "megadrain": {
+            "display": "Mega Drain",
+            "type": "Grass"
+        },
+        "mimic": {
+            "display": "Mimic",
+            "type": "Normal"
+        },
+        "petaldance": {
+            "display": "Petal Dance",
+            "type": "Grass"
+        },
+        "poisonpowder": {
+            "display": "Poison Powder",
+            "type": "Poison"
+        },
+        "rage": {
+            "display": "Rage",
+            "type": "Normal"
+        },
+        "razorleaf": {
+            "display": "Razor Leaf",
+            "type": "Grass"
+        },
+        "reflect": {
+            "display": "Reflect",
+            "type": "Psychic"
+        },
+        "rest": {
+            "display": "Rest",
+            "type": "Psychic"
+        },
+        "skullbash": {
+            "display": "Skull Bash",
+            "type": "Normal"
+        },
+        "Scratch": {
+            "display": "Scratch",
+            "type": "Normal"
+        },
+        "sleeppowder": {
+            "display": "Sleep Powder",
+            "type": "Grass"
+        },
+        "sludge": {
+            "display": "Sludge",
+            "type": "Poison"
+        },
+        "poisonsting": {
+            "display": "Poison Sting",
+            "type": "Poison"
+        },
+        "acid": {
+            "display": "Acid",
+            "type": "Poison"
+        },
+        "smog": {
+            "display": "Smog",
+            "type": "Poison"
+        },
+        "solarbeam": {
+            "display": "Solar Beam",
+            "type": "Grass"
+        },
+        "stunspore": {
+            "display": "Stun Spore",
+            "type": "Grass"
+        },
+        "strength": {
+            "display": "Strength",
+            "type": "Normal"
+        },
+        "stringshot": {
+            "display": "String Shot",
+            "type": "Bug"
+        },
+        "struggle": {
+            "display": "Struggle",
+            "type": "Normal"
+        },
+        "pinmissile": {
+            "display": "Pin Missile",
+            "type": "Bug"
+        },
+        "twinneedle": {
+            "display": "Twineedle",
+            "type": "Bug"
+        },
+        "substitute": {
+            "display": "Substitute",
+            "type": "Normal"
+        },
+        "swordsdance": {
+            "display": "Swords Dance",
+            "type": "Normal"
+        },
+        "tackle": {
+            "display": "Tackle",
+            "type": "Normal"
+        },
+        "takedown": {
+            "display": "Take Down",
+            "type": "Normal"
+        },
+        "toxic": {
+            "display": "Toxic",
+            "type": "Poison"
+        },
+        "poisongas": {
+            "display": "Poison Gas",
+            "type": "Poison"
+        },
+        "vinewhip": {
+            "display": "Vine Whip",
+            "type": "Grass"
+        },
+        "absorb": {
+            "display": "Absorb",
+            "type": "Grass"
+        },
+        "bite": {
+            "display": "Bite",
+            "type": "Dark"
+        },
+        "counter": {
+            "display": "Counter",
+            "type": "Fighting"
+        },
+        "doublekick": {
+            "display": "Double Kick",
+            "type": "Fighting"
+        },
+        "submission": {
+            "display": "Submission",
+            "type": "Fighting"
+        },
+        "dig": {
+            "display": "Dig",
+            "type": "Ground"
+        },
+        "earthquake": {
+            "display": "Earthquake",
+            "type": "Ground"
+        },
+        "fissure": {
+            "display": "Fissure",
+            "type": "Ground"
+        },
+        "sandattack": {
+            "display": "Sand Attack",
+            "type": "Ground"
+        },
+        "boneclub": {
+            "display": "Bone Club",
+            "type": "Ground"
+        },
+        "bonemerang": {
+            "display": "Bonemerang",
+            "type": "Ground"
+        },
+        "dragonrage": {
+            "display": "Dragon Rage",
+            "type": "Dragon"
+        },
+        "ember": {
+            "display": "Ember",
+            "type": "Fire"
+        },
+        "fireblast": {
+            "display": "Fire Blast",
+            "type": "Fire"
+        },
+        "firepunch": {
+            "display": "Fire Punch",
+            "type": "Fire"
+        },
+        "firespin": {
+            "display": "Fire Spin",
+            "type": "Fire"
+        },
+        "flamethrower": {
+            "display": "Flamethrower",
+            "type": "Fire"
+        },
+        "furyswipes": {
+            "display": "Fury Swipes",
+            "type": "Normal"
+        },
+        "quickattack": {
+            "display": "Quick Attack",
+            "type": "Normal"
+        },
+        "hornattack": {
+            "display": "Horn Attack",
+            "type": "Normal"
+        },
+        "rockslide": {
+            "display": "Rock Slide",
+            "type": "Rock"
+        },
+        "rockthrow": {
+            "display": "Rock Throw",
+            "type": "Rock"
+        },
+        "seismictoss": {
+            "display": "Seismic Toss",
+            "type": "Fighting"
+        },
+        "karatechop": {
+            "display": "Karate Chop",
+            "type": "Fighting"
+        },
+        "swift": {
+            "display": "Swift",
+            "type": "Normal"
+        },
+        "wingattack": {
+            "display": "Wing Attack",
+            "type": "Flying"
+        },
+        "mirrormove": {
+            "display": "Mirror Move",
+            "type": "Flying"
+        },
+        "fly": {
+            "display": "Fly",
+            "type": "Flying"
+        },
+        "skyattack": {
+            "display": "Sky Attack",
+            "type": "Flying"
+        },
+        "blizzard": {
+            "display": "Blizzard",
+            "type": "Ice"
+        },
+        "aurorabeam": {
+            "display": "Aurora Beam",
+            "type": "Ice"
+        },
+        "bubble": {
+            "display": "Bubble",
+            "type": "Water"
+        },
+        "bubblebeam": {
+            "display": "Bubble Beam",
+            "type": "Water"
+        },
+        "surf": {
+            "display": "Surf",
+            "type": "Water"
+        },
+        "waterfall": {
+            "display": "Waterfall",
+            "type": "Water"
+        },
+        "confusion": {
+            "display": "Confusion",
+            "type": "Psychic"
+        },
+        "dreameater": {
+            "display": "Dream Eater",
+            "type": "Psychic"
+        },
+        "teleport": {
+            "display": "Teleport",
+            "type": "Psychic"
+        },
+        "agility": {
+            "display": "Agility",
+            "type": "Psychic"
+        },
+        "eggbomb": {
+            "display": "Egg Bomb",
+            "type": "Normal"
+        },
+        "explosion": {
+            "display": "Explosion",
+            "type": "Normal"
+        },
+        "furyattack": {
+            "display": "Fury Attack",
+            "type": "Normal"
+        },
+        "horndrill": {
+            "display": "Horn Drill",
+            "type": "Normal"
+        },
+        "doubleslap": {
+            "display": "Double Slap",
+            "type": "Normal"
+        },
+        "gust": {
+            "display": "Gust",
+            "type": "Flying"
+        },
+        "peck": {
+            "display": "Peck",
+            "type": "Flying"
+        },
+        "drillpeck": {
+            "display": "Drill Peck",
+            "type": "Flying"
+        },
+        "superfang": {
+            "display": "Super Fang",
+            "type": "Normal"
+        },
+        "haze": {
+            "display": "Haze",
+            "type": "Ice"
+        },
+        "hydropump": {
+            "display": "Hydro Pump",
+            "type": "Water"
+        },
+        "icebeam": {
+            "display": "Ice Beam",
+            "type": "Ice"
+        },
+        "icepunch": {
+            "display": "Ice Punch",
+            "type": "Ice"
+        },
+        "lowkick": {
+            "display": "Low Kick",
+            "type": "Fighting"
+        },
+        "megakick": {
+            "display": "Mega Kick",
+            "type": "Normal"
+        },
+        "megapunch": {
+            "display": "Mega Punch",
+            "type": "Normal"
+        },
+        "metronome": {
+            "display": "Metronome",
+            "type": "Normal"
+        },
+        "mist": {
+            "display": "Mist",
+            "type": "Ice"
+        },
+        "payday": {
+            "display": "Pay Day",
+            "type": "Normal"
+        },
+        "hyperbeam": {
+            "display": "Hyper Beam",
+            "type": "Normal"
+        },
+        "tailwhip": {
+            "display": "Tail Whip",
+            "type": "Normal"
+        },
+        "psybeam": {
+            "display": "Psybeam",
+            "type": "Psychic"
+        },
+        "psychic": {
+            "display": "Psychic",
+            "type": "Psychic"
+        },
+        "psywave": {
+            "display": "Psywave",
+            "type": "Psychic"
+        },
+        "barrier": {
+            "display": "Barrier",
+            "type": "Psychic"
+        },
+        "hypnosis": {
+            "display": "Hypnosis",
+            "type": "Psychic"
+        },
+        "thunder": {
+            "display": "Thunder",
+            "type": "Electric"
+        },
+        "thunderbolt": {
+            "display": "Thunderbolt",
+            "type": "Electric"
+        },
+        "thundershock": {
+            "display": "Thunder Shock",
+            "type": "Electric"
+        },
+        "thunderwave": {
+            "display": "Thunder Wave",
+            "type": "Electric"
+        },
+        "thunderpunch": {
+            "display": "Thunder Punch",
+            "type": "Electric"
+        },
+        "triattack": {
+            "display": "Tri Attack",
+            "type": "Normal"
+        },
+        "razorwind": {
+            "display": "Razor Wind",
+            "type": "Normal"
+        },
+        "focusenergy": {
+            "display": "Focus Energy",
+            "type": "Normal"
+        },
+        "watergun": {
+            "display": "Water Gun",
+            "type": "Water"
+        },
+        "lick": {
+            "display": "Lick",
+            "type": "Ghost"
+        },
+        "nightshade": {
+            "display": "Night Shade",
+            "type": "Ghost"
+        },
+        "confuseray": {
+            "display": "Confuse Ray",
+            "type": "Ghost"
+        },
+        "clamp": {
+            "display": "Clamp",
+            "type": "Water"
+        },
+        "withdraw": {
+            "display": "Withdraw",
+            "type": "Water"
+        },
+                "acidarmor": {
+            "display": "Acid Armor",
+            "type": "Poison"
+        },
+        "barrage": {
+            "display": "Barrage",
+            "type": "Normal"
+        },
+        "cometpunch": {
+            "display": "Comet Punch",
+            "type": "Normal"
+        },
+        "constrict": {
+            "display": "Constrict",
+            "type": "Normal"
+        },
+        "conversion": {
+            "display": "Conversion",
+            "type": "Normal"
+        },
+        "disable": {
+            "display": "Disable",
+            "type": "Normal"
+        },
+        "dizzypunch": {
+            "display": "Dizzy Punch",
+            "type": "Normal"
+        },
+        "doubleedge": {
+            "display": "Double-Edge",
+            "type": "Normal"
+        },
+        "glare": {
+            "display": "Glare",
+            "type": "Normal"
+        },
+        "guillotine": {
+            "display": "Guillotine",
+            "type": "Normal"
+        },
+        "harden": {
+            "display": "Harden",
+            "type": "Normal"
+        },
+        "highjumpkick": {
+            "display": "High Jump Kick",
+            "type": "Fighting"
+        },
+        "hyperfang": {
+            "display": "Hyper Fang",
+            "type": "Normal"
+        },
+        "jumpkick": {
+            "display": "Jump Kick",
+            "type": "Fighting"
+        },
+        "kinesis": {
+            "display": "Kinesis",
+            "type": "Psychic"
+        },
+        "leer": {
+            "display": "Leer",
+            "type": "Normal"
+        },
+        "lovelykiss": {
+            "display": "Lovely Kiss",
+            "type": "Normal"
+        },
+        "meditate": {
+            "display": "Meditate",
+            "type": "Psychic"
+        },
+        "minimize": {
+            "display": "Minimize",
+            "type": "Normal"
+        },
+        "pound": {
+            "display": "Pound",
+            "type": "Normal"
+        },
+        "recover": {
+            "display": "Recover",
+            "type": "Normal"
+        },
+        "roar": {
+            "display": "Roar",
+            "type": "Normal"
+        },
+        "rollingkick": {
+            "display": "Rolling Kick",
+            "type": "Fighting"
+        },
+        "screech": {
+            "display": "Screech",
+            "type": "Normal"
+        },
+        "selfdestruct": {
+            "display": "Self-Destruct",
+            "type": "Normal"
+        },
+        "sharpen": {
+            "display": "Sharpen",
+            "type": "Normal"
+        },
+        "sing": {
+            "display": "Sing",
+            "type": "Normal"
+        },
+        "slam": {
+            "display": "Slam",
+            "type": "Normal"
+        },
+        "slash": {
+            "display": "Slash",
+            "type": "Normal"
+        },
+        "smokescreen": {
+            "display": "Smokescreen",
+            "type": "Normal"
+        },
+        "softboiled": {
+            "display": "Soft-Boiled",
+            "type": "Normal"
+        },
+        "sonicboom": {
+            "display": "Sonic Boom",
+            "type": "Normal"
+        },
+        "spikecannon": {
+            "display": "Spike Cannon",
+            "type": "Normal"
+        },
+        "splash": {
+            "display": "Splash",
+            "type": "Normal"
+        },
+        "spore": {
+            "display": "Spore",
+            "type": "Grass"
+        },
+        "stomp": {
+            "display": "Stomp",
+            "type": "Normal"
+        },
+        "supersonic": {
+            "display": "Supersonic",
+            "type": "Normal"
+        },
+        "thrash": {
+            "display": "Thrash",
+            "type": "Normal"
+        },
+        "transform": {
+            "display": "Transform",
+            "type": "Normal"
+        },
+        "visegrip": {
+            "display": "Vise Grip",
+            "type": "Normal"
+        },
+        "whirlwind": {
+            "display": "Whirlwind",
+            "type": "Normal"
+        },
+        "aeroblast": {
+            "display": "Aeroblast",
+            "type": "Flying"
+        },
+        "ancientpower": {
+            "display": "Ancient Power",
+            "type": "Rock"
+        },
+        "attract": {
+            "display": "Attract",
+            "type": "Normal"
+        },
+        "batonpass": {
+            "display": "Baton Pass",
+            "type": "Normal"
+        },
+        "beatup": {
+            "display": "Beat Up",
+            "type": "Dark"
+        },
+        "bellydrum": {
+            "display": "Belly Drum",
+            "type": "Normal"
+        },
+        "bonerush": {
+            "display": "Bone Rush",
+            "type": "Ground"
+        },
+        "charm": {
+            "display": "Charm",
+            "type": "Normal"
+        },
+        "conversion2": {
+            "display": "Conversion 2",
+            "type": "Normal"
+        },
+        "cottonspore": {
+            "display": "Cotton Spore",
+            "type": "Grass"
+        },
+        "crosschop": {
+            "display": "Cross Chop",
+            "type": "Fighting"
+        },
+        "crunch": {
+            "display": "Crunch",
+            "type": "Dark"
+        },
+        "curse": {
+            "display": "Curse",
+            "type": "Ghost"
+        },
+        "destinybond": {
+            "display": "Destiny Bond",
+            "type": "Ghost"
+        },
+        "detect": {
+            "display": "Detect",
+            "type": "Fighting"
+        },
+        "dragonbreath": {
+            "display": "Dragon Breath",
+            "type": "Dragon"
+        },
+        "dynamicpunch": {
+            "display": "Dynamic Punch",
+            "type": "Fighting"
+        },
+        "encore": {
+            "display": "Encore",
+            "type": "Normal"
+        },
+        "endure": {
+            "display": "Endure",
+            "type": "Normal"
+        },
+        "extremespeed": {
+            "display": "Extreme Speed",
+            "type": "Normal"
+        },
+        "falseswipe": {
+            "display": "False Swipe",
+            "type": "Normal"
+        },
+        "feintattack": {
+            "display": "Feint Attack",
+            "type": "Dark"
+        },
+        "flail": {
+            "display": "Flail",
+            "type": "Normal"
+        },
+        "flamewheel": {
+            "display": "Flame Wheel",
+            "type": "Fire"
+        },
+        "foresight": {
+            "display": "Foresight",
+            "type": "Normal"
+        },
+        "frustration": {
+            "display": "Frustration",
+            "type": "Normal"
+        },
+        "furycutter": {
+            "display": "Fury Cutter",
+            "type": "Bug"
+        },
+        "futuresight": {
+            "display": "Future Sight",
+            "type": "Psychic"
+        },
+        "gigadrain": {
+            "display": "Giga Drain",
+            "type": "Grass"
+        },
+        "healbell": {
+            "display": "Heal Bell",
+            "type": "Normal"
+        },
+        "hiddenpower": {
+            "display": "Hidden Power",
+            "type": "Normal"
+        },
+        "icywind": {
+            "display": "Icy Wind",
+            "type": "Ice"
+        },
+        "irontail": {
+            "display": "Iron Tail",
+            "type": "Steel"
+        },
+        "lockon": {
+            "display": "Lock-On",
+            "type": "Normal"
+        },
+        "machpunch": {
+            "display": "Mach Punch",
+            "type": "Fighting"
+        },
+        "magnitude": {
+            "display": "Magnitude",
+            "type": "Ground"
+        },
+        "meanlook": {
+            "display": "Mean Look",
+            "type": "Normal"
+        },
+        "megahorn": {
+            "display": "Megahorn",
+            "type": "Bug"
+        },
+        "metalclaw": {
+            "display": "Metal Claw",
+            "type": "Steel"
+        },
+        "milkdrink": {
+            "display": "Milk Drink",
+            "type": "Normal"
+        },
+        "mindreader": {
+            "display": "Mind Reader",
+            "type": "Normal"
+        },
+        "mirrorcoat": {
+            "display": "Mirror Coat",
+            "type": "Psychic"
+        },
+        "moonlight": {
+            "display": "Moonlight",
+            "type": "Normal"
+        },
+        "morningsun": {
+            "display": "Morning Sun",
+            "type": "Normal"
+        },
+        "mudslap": {
+            "display": "Mud-Slap",
+            "type": "Ground"
+        },
+        "nightmare": {
+            "display": "Nightmare",
+            "type": "Ghost"
+        },
+        "octazooka": {
+            "display": "Octazooka",
+            "type": "Water"
+        },
+        "outrage": {
+            "display": "Outrage",
+            "type": "Dragon"
+        },
+        "painsplit": {
+            "display": "Pain Split",
+            "type": "Normal"
+        },
+        "perishsong": {
+            "display": "Perish Song",
+            "type": "Normal"
+        },
+        "powdersnow": {
+            "display": "Powder Snow",
+            "type": "Ice"
+        },
+        "present": {
+            "display": "Present",
+            "type": "Normal"
+        },
+        "protect": {
+            "display": "Protect",
+            "type": "Normal"
+        },
+        "psychup": {
+            "display": "Psych Up",
+            "type": "Normal"
+        },
+        "pursuit": {
+            "display": "Pursuit",
+            "type": "Dark"
+        },
+        "raindance": {
+            "display": "Rain Dance",
+            "type": "Water"
+        },
+        "rapidspin": {
+            "display": "Rapid Spin",
+            "type": "Normal"
+        },
+        "return": {
+            "display": "Return",
+            "type": "Normal"
+        },
+        "reversal": {
+            "display": "Reversal",
+            "type": "Fighting"
+        },
+        "rocksmash": {
+            "display": "Rock Smash",
+            "type": "Fighting"
+        },
+        "rollout": {
+            "display": "Rollout",
+            "type": "Rock"
+        },
+        "sacredfire": {
+            "display": "Sacred Fire",
+            "type": "Fire"
+        },
+        "safeguard": {
+            "display": "Safeguard",
+            "type": "Normal"
+        },
+        "sandstorm": {
+            "display": "Sandstorm",
+            "type": "Rock"
+        },
+        "scaryface": {
+            "display": "Scary Face",
+            "type": "Normal"
+        },
+        "shadowball": {
+            "display": "Shadow Ball",
+            "type": "Ghost"
+        },
+        "sketch": {
+            "display": "Sketch",
+            "type": "Normal"
+        },
+        "sleeptalk": {
+            "display": "Sleep Talk",
+            "type": "Normal"
+        },
+        "sludgebomb": {
+            "display": "Sludge Bomb",
+            "type": "Poison"
+        },
+        "snore": {
+            "display": "Snore",
+            "type": "Normal"
+        },
+        "spark": {
+            "display": "Spark",
+            "type": "Electric"
+        },
+        "spiderweb": {
+            "display": "Spider Web",
+            "type": "Bug"
+        },
+        "spikes": {
+            "display": "Spikes",
+            "type": "Ground"
+        },
+        "spite": {
+            "display": "Spite",
+            "type": "Ghost"
+        },
+        "steelwing": {
+            "display": "Steel Wing",
+            "type": "Steel"
+        },
+        "sunnyday": {
+            "display": "Sunny Day",
+            "type": "Fire"
+        },
+        "swagger": {
+            "display": "Swagger",
+            "type": "Normal"
+        },
+        "sweetkiss": {
+            "display": "Sweet Kiss",
+            "type": "Normal"
+        },
+        "sweetscent": {
+            "display": "Sweet Scent",
+            "type": "Normal"
+        },
+        "synthesis": {
+            "display": "Synthesis",
+            "type": "Grass"
+        },
+        "thief": {
+            "display": "Thief",
+            "type": "Dark"
+        },
+        "triplekick": {
+            "display": "Triple Kick",
+            "type": "Fighting"
+        },
+        "twister": {
+            "display": "Twister",
+            "type": "Dragon"
+        },
+        "vitalthrow": {
+            "display": "Vital Throw",
+            "type": "Fighting"
+        },
+        "whirlpool": {
+            "display": "Whirlpool",
+            "type": "Water"
+        },
+        "zapcannon": {
+            "display": "Zap Cannon",
+            "type": "Electric"
+        }
+    },
+    "typeColors": {
+        "Normal": "#A8A77A",
+        "Fire": "#EE8130",
+        "Fighting": "#C22E28",
+        "Electric": "#F7D02C",
+        "Water": "#6390F0",
+        "Grass": "#7AC74C",
+        "Ice": "#96D9D6",
+        "Poison": "#A33EA1",
+        "Ground": "#E2BF65",
+        "Flying": "#A98FF3",
+        "Psychic": "#F95587",
+        "Bug": "#A6B91A",
+        "Rock": "#B6A136",
+        "Ghost": "#735797",
+        "Dragon": "#6F35FC",
+        "Dark": "#705746",
+        "Steel": "#B7B7CE"
+    }
+}
