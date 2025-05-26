@@ -184,7 +184,7 @@ function renderTeam(team, containerId, showMoves = true) {
           return `<div class="move-box type-${getMoveType(move)}">${moveObj && moveObj.display ? moveObj.display : move}</div>`;
         }).join('') : '';
         movesHtml = `
-          <div class="moves-section moves-grid" style="margin-top:8px;">
+          <div class="moves-section moves-grid"">
             ${moves}
           </div>
         `;

@@ -83,6 +83,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
 }
 
 /* Show sidebar when active */
@@ -154,7 +155,7 @@ body {
 
 .logo {
   width: 150px;
-  margin: 60px 0 16px;
+  margin: 24px 0 16px;
 }
 
 nav {
@@ -222,21 +223,17 @@ nav {
 .title-row {
   display: flex;
   align-items: baseline;
-  gap: 18px;
+  gap: 8px;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .title-row h1 {
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
-}
-
-.title-row .title-dash {
-  font-size: 2rem;
-  color: #a00;
-  opacity: 0.7;
-  margin: 0 8px;
 }
 
 .title-row h2 {
@@ -274,7 +271,6 @@ nav {
   flex-wrap:wrap;
   justify-content: center;;
   gap: 48px;
-  width: 95%;
 }
 
 .team-section {
@@ -282,7 +278,8 @@ nav {
   border-radius: 18px;
   padding: 0 0 32px 0;
   width:100%;
-  min-height:527px;
+  min-width:1578px;
+  min-height:550px;
   box-shadow: 0 2px 16px #0003;
 }
 
@@ -299,9 +296,8 @@ nav {
     min-width:320px;
     background: #232323;
     border-radius: 18px;
-    padding: 0 24px 0 24px;
     width:100%;
-    min-height:225px;
+    min-height:245px;
     box-shadow: 0 2px 16px #0003;
 }
 
@@ -323,14 +319,14 @@ nav {
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 45px 0px;
-    margin-top:20px;
+    padding:20px;
 }
 
 /* Pokemon Card */
 .pokemon-card {
   background: var(--color-card);
   border-radius: 18px;
-  padding: 0 0 25px;
+  padding: 0 10px 25px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -551,7 +547,6 @@ nav {
 .stadium-sections {
   display: flex;
   gap: 48px;
-  width: 100%;
   justify-content: center;
   flex-direction: row;
 }
@@ -689,52 +684,61 @@ footer a{
     text-decoration: none;
 }
 
+@media (max-width: 1585px) {
+  
+  .team-section {
+    min-width:inherit;
+  }
+}
+
 /* Responsive: adjust main content and teams for tablets */
 @media (max-width: 1200px) {
-  .main-content,
-  .teams,
-  .team-section {
-    padding: 24px 12px;
-    gap: 70px;
-  }
   
   .battle-team-section .cards {
     flex-direction: row;
   }
-
-  .section-profile-btn{
-    bottom:45px;
-  }
-
-  .cards{
-    margin-top:0;
-  }
 }
 
 /* Responsive: stack teams vertically and cards full width on mobile/tablet */
-@media (max-width: 900px) {
+@media (max-width: 1115px) {
   .main-content,
   .team-section,
   .battle-team-section{
-    padding: 0;
     box-sizing: border-box;
   }
+
+  .pokemon-card{
+    flex-direction: column;
+    padding: 0 10px 25px;
+    gap:8px;
+  }
   
-  .pokemon-card {
-    width: 98vw;
+  .moves-grid {
+  grid-template-columns:auto;
+  grid-template-rows: auto;
+  gap:8px;
+  }
+  .card-info-moves{
+    margin:0;
+    align-items: center;
+  }
+  .poke-extra-info{
+    padding:4% 2%;
+    justify-content: center;
   }
 }
 
 /* Responsive: mobile adjustments for <600px */
 @media (max-width: 600px) {
-  .main-content {
-    padding: 8px 0 8px 0;
+  .sidebar{
+    width:99.4vw;
+    left:-99.4vw;
+    max-width: inherit;
   }
-
   .stadium-sections{
     flex-direction: column;
   }
-  .title-row h1, .title-row h2, .title-row .title-dash {
+  .title-row h1, .title-row h2, .title-row {
     font-size: 1.3rem;
   }
   .button-row {
@@ -746,10 +750,10 @@ footer a{
     padding: 0 2vw 12px 2vw;
   }
   .profile-bg, .profile-img-mask img {
-    max-width: 90px;
-    max-height: 90px;
-    min-width: 90px;
-    min-height: 90px;
+    max-width: 120px;
+    max-height: 120px;
+    min-width: 120px;
+    min-height: 120px;
   }
   .profile-name, .section-profile-btn {
     font-size: 1rem;
@@ -779,6 +783,18 @@ footer a{
   .move-box {
     min-width: 108px;
     font-size: 0.9rem;
+  }
+  .battle-team-section{
+    min-height: auto;
+  }
+  .battle-team-section .profile-bg, .battle-team-section .profile-img-mask img{
+    max-width: 90px;
+    max-height: 90px;
+    min-width: 90px;
+    min-height: 90px;
+    }
+  .battle-team-section, .battle-team-section .cards *{
+    padding:0;
   }
   .footer-content {
     font-size: 0.8rem;

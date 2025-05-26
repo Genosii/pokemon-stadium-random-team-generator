@@ -996,6 +996,10 @@
             "display": "Whirlpool",
             "type": "Water"
         },
+        "wrap": {
+            "display": "Wrap",
+            "type": "Normal"
+        },
         "zapcannon": {
             "display": "Zap Cannon",
             "type": "Electric"
