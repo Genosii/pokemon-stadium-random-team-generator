@@ -7,4 +7,6 @@ To-do:
 - Improve background for Stadium 2 nav buttons
 - Explore different hover effects and animations
 - Add more Unown forms
+- Delete redundant JS
+- Optimize CSS
 - ...
