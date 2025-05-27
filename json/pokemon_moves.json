@@ -1000,6 +1000,10 @@
             "display": "Wrap",
             "type": "Normal"
         },
+        "scratch": {
+            "display": "Scratch",
+            "type": "Normal"
+        },
         "zapcannon": {
             "display": "Zap Cannon",
             "type": "Electric"
