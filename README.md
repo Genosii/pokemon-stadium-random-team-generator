@@ -1,5 +1,5 @@
-# pokemon-stadium-randomizer
-A web tool to randomize your teams with legal Pokemon in Stadium 1 and 2.
+# pokemon-stadium-random-team-generator
+A web tool to generate a randomized team of 6 Pokemon and a battle team of 3 Pokemon with legal moves in Stadium 1 and 2.
 
 To-do:
 - Export team button for easy imports
@@ -9,4 +9,4 @@ To-do:
 - Add more Unown forms
 - Delete redundant JS
 - Optimize CSS
-- ...
+- Add toggle for animated gen 5 sprites
