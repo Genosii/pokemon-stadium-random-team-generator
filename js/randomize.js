@@ -32,10 +32,20 @@ const PIKA_CUP_POKEMON = [
   "pinsir","magikarp","gyarados","lapras","ditto","porygon","omanyte","kabuto","dratini","dragonair"
 ];
 
+// Add new variables for toggles
+let noTradebackMoves = false;
+let no3dModels = false;
+
 // Gen 2 move exclusion list for Stadium 1
 const GEN2_MOVE_EXCLUSIONS = [
   "Aeroblast","Ancient Power","Attract","Baton Pass","Beat Up","Belly Drum","Bone Rush","Charm","Conversion 2","Cotton Spore","Cross Chop","Crunch","Curse","Destiny Bond","Detect","Dragon Breath","Dynamic Punch","Encore","Endure","Extreme Speed","False Swipe","Feint Attack","Flail","Flame Wheel","Foresight","Frustration","Fury Cutter","Future Sight","Giga Drain","Heal Bell","Hidden Power","Icy Wind","Iron Tail","Lock-On","Mach Punch","Magnitude","Mean Look","Megahorn","Metal Claw","Milk Drink","Mind Reader","Mirror Coat","Moonlight","Morning Sun","Mud-Slap","Nightmare","Octazooka","Outrage","Pain Split","Perish Song","Powder Snow","Present","Protect","Psych Up","Pursuit","Rain Dance","Rapid Spin","Return","Reversal","Rock Smash","Rollout","Sacred Fire","Safeguard","Sandstorm","Scary Face","Shadow Ball","Sketch","Sleep Talk","Sludge Bomb","Snore","Spark","Spider Web","Spikes","Spite","Steel Wing","Sunny Day","Swagger","Sweet Kiss","Sweet Scent","Synthesis","Thief","Triple Kick","Twister","Vital Throw","Whirlpool","Zap Cannon"
 ].map(m => m.toLowerCase().replace(/\s+/g, ""));
+
+// toggle state variables
+let pokemonData = {};
+let moveData = {};
+let currentMode = 's1gym';
+let currentFixedTeam = [];
 
 // Helper: get only Gen 1-legal moves for Stadium 1
 function getLegalStadium1Moves(pokemonName) {
@@ -43,22 +53,23 @@ function getLegalStadium1Moves(pokemonName) {
   if (!poke || !poke.learnset) return [];
   // pokemon_data.json: {pokemon: {learnset: {move: [methods]}}}
   const learnset = poke.learnset;
-  // Only allow moves:
-  // - Not in GEN2_MOVE_EXCLUSIONS
-  // - That have a Gen 1 learn method (method starts with '1')
+  // Allow moves based on tradeback setting
   return Object.keys(learnset).filter(move => {
     const moveKey = move.toLowerCase().replace(/\s+/g, "");
     if (GEN2_MOVE_EXCLUSIONS.includes(moveKey)) return false;
     const methods = learnset[move];
     if (!Array.isArray(methods)) return false;
-    return methods.some(m => m.startsWith('1'));
+    if (noTradebackMoves) {
+      // Only allow native Gen 1 moves when tradeback is disabled
+      // Must start with 1 and have a letter after it (1L, 1M, 1T, etc.)
+      return methods.some(m => /^1[A-Z]/.test(m));
+    } else {
+      // When tradeback is enabled, allow both Gen 1 and Gen 2 moves
+      // Must start with 1 or 2 and have a letter after it
+      return methods.some(m => /^[12][A-Z]/.test(m));
+    }
   });
 }
-
-let pokemonData = {};
-let moveData = {};
-let currentMode = 's1gym';
-let currentFixedTeam = [];
 
 function getMoveType(move) {
   let normalized = move.toLowerCase().replace(/\s+/g, "");
@@ -163,7 +174,7 @@ function renderTeam(team, containerId, showMoves = true) {
       // Extra info
       const level = poke.level || getRandomLevel();
       const gender = poke.gender || getRandomGender(poke.name);
-      // Extra info row - removed noItem check since we want to show "No Item" for Stadium 1
+      // Extra info row
       let extraInfoHtml = `
         <div class="poke-extra-info">
           <span title="Level">Lv. ${level}</span>
@@ -193,10 +204,12 @@ function renderTeam(team, containerId, showMoves = true) {
       if (poke.name && poke.dex) {
         container.innerHTML += `
           <div class="pokemon-card${isBattle ? ' battle-card' : ''}">
-            ${!isBattle ? nameHtml : ''}
-            <div class="profile-bg">
+            ${!isBattle ? nameHtml : ''}              <div class="profile-bg">
               <div class="profile-img-mask">
-                <img src="assets/${poke.shiny ? 'shiny' : 'normal'}-models/${poke.dex}.gif" alt="${poke.name}">
+                ${!no3dModels ? 
+                  `<img src="assets/${poke.shiny ? 'shiny' : 'normal'}-models/${poke.dex}.gif" alt="${poke.name}">` : 
+                  `<img src="https://img.pokemondb.net/sprites/black-white/anim/normal/${normalizePokemonName(poke.name)}.gif" alt="${poke.name}" 
+                   style="width: 100px; height: 100px; max-width: none; object-fit: contain;">`}
               </div>
             </div>
             <div class="card-info-moves">
@@ -212,10 +225,10 @@ function renderTeam(team, containerId, showMoves = true) {
     const cards = container.querySelectorAll('.pokemon-card');
     cards.forEach(card => void card.offsetWidth);
     setTimeout(() => {
-    cards.forEach((card, i) => {
-      setTimeout(() => card.classList.add('reveal'), i * 80);
-    });
-  }, 10);
+      cards.forEach((card, i) => {
+        setTimeout(() => card.classList.add('reveal'), i * 80);
+      });
+    }, 10);
   }
 }
 
@@ -329,7 +342,8 @@ function filterPokemonForMode(mode) {
 // Simplify getMoveInheritance function since moves are already inherited
 const moveCache = new Map();
 function getMoveInheritance(pokemonName, currentMode) {
-  const cacheKey = `${pokemonName}_${currentMode}`;
+  // Include both mode and tradeback setting in cache key
+  const cacheKey = `${pokemonName}_${currentMode}_${noTradebackMoves}`;
   if (moveCache.has(cacheKey)) return moveCache.get(cacheKey);
 
   if (!pokemonData[pokemonName] || !pokemonData[pokemonName].learnset) {
@@ -341,13 +355,28 @@ function getMoveInheritance(pokemonName, currentMode) {
   if (pokemonName.toLowerCase() === 'smeargle') {
     moves = Object.keys(moveData.moveTypes);
   } else if (currentMode.startsWith('s1')) {
-    moves = getLegalStadium1Moves(pokemonName);
+    // Filter moves for Stadium 1 modes
+    const moveList = Object.entries(pokemonData[pokemonName].learnset);
+    moves = moveList
+      .filter(([move, methods]) => {
+        const moveKey = move.toLowerCase().replace(/\s+/g, "");
+        if (GEN2_MOVE_EXCLUSIONS.includes(moveKey)) return false;
+        if (!Array.isArray(methods)) return false;
+        if (noTradebackMoves) {
+          // Must have at least one Gen 1 method starting with 1 and a letter
+          return methods.some(m => /^1[A-Z]/.test(m));
+        } else {
+          // Can have either Gen 1 or Gen 2 method starting with 1 or 2 and a letter
+          return methods.some(m => /^[12][A-Z]/.test(m));
+        }
+      })
+      .map(([move]) => move);
   } else {
     moves = Object.keys(pokemonData[pokemonName].learnset);
   }
   
   if (!moves || moves.length === 0) {
-    console.warn(`No moves found for ${pokemonName}, defaulting to Struggle`);
+    console.warn(`No valid moves found for ${pokemonName}, defaulting to Struggle`);
     moves = ["Struggle"];
   }
 
@@ -561,25 +590,25 @@ function generateBattleTeam() {
     let levelSumMax = 80;
     if (currentMode === "s1Pika") levelSumMax = 50;
     if (currentMode === "s1Poke" || currentMode === "s2Poke") levelSumMax = 155;
-    // Try to find a valid combination
-    const indices = [0,1,2,3,4,5];
-    let found = false;
+    
+    // Find all valid combinations
+    const validCombinations = [];
     for (let i = 0; i < 4; i++) {
       for (let j = i+1; j < 5; j++) {
         for (let k = j+1; k < 6; k++) {
           const sum = currentFixedTeam[i].level + currentFixedTeam[j].level + currentFixedTeam[k].level;
           if (sum <= levelSumMax) {
-            team = [currentFixedTeam[i], currentFixedTeam[j], currentFixedTeam[k]];
-            found = true;
-            break;
+            validCombinations.push([currentFixedTeam[i], currentFixedTeam[j], currentFixedTeam[k]]);
           }
         }
-        if (found) break;
       }
-      if (found) break;
     }
-    if (!team.length) {
-      // fallback: just pick first 3
+    
+    if (validCombinations.length > 0) {
+      // Randomly select one valid combination
+      team = validCombinations[Math.floor(Math.random() * validCombinations.length)];
+    } else {
+      // Fallback: just pick first 3 (should rarely happen with proper level generation)
       team = currentFixedTeam.slice(0,3);
     }
     renderTeam(team, 'battle-team', false);
@@ -615,6 +644,12 @@ function setMode(mode) {
     
     currentMode = mode;
     
+    // Update tradeback toggle visibility
+    const toggleContainer = document.getElementById('toggle-tradeback').closest('.toggle-container');
+    if (toggleContainer) {
+      toggleContainer.style.display = mode.startsWith('s1') ? 'flex' : 'none';
+    }
+    
     // Update titles
     if (mode.startsWith('s2')) {
       document.querySelector('.title-row h1').textContent = "Pokémon Stadium 2";
@@ -635,6 +670,20 @@ function setMode(mode) {
   }, 400); // Match CSS transition duration
 }
 
+// Helper function to normalize Pokemon names for PokemonDB URLs
+function normalizePokemonName(name) {
+  // Convert to lowercase
+  name = name.toLowerCase();
+  // Handle special cases
+  switch (name) {
+    case 'nidoranf': return 'nidoran-f';
+    case 'nidoranm': return 'nidoran-m';
+    case 'farfetchd': return 'farfetchd';
+    case 'mrmime': return 'mr-mime';
+    default: return name;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   Promise.all([
     fetch('json/pokemon_data.json').then(res => res.json()).catch(() => ({})),
@@ -646,7 +695,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     pokemonData = pokeData;
     moveData = moveJson;
-    // Remove initial setMode call - let user pick from landing page
+
+    // Add toggle handlers
+    const tradebackToggle = document.getElementById('toggle-tradeback');
+    tradebackToggle.addEventListener('change', (e) => {
+      noTradebackMoves = e.target.checked;
+      if (currentFixedTeam.length > 0) {
+        randomizeFullTeam(); // Regenerate team with new setting
+      }
+    });
+    
+    // Hide tradeback toggle for Stadium 2 modes
+    const updateTradebackVisibility = () => {
+      const toggleContainer = tradebackToggle.closest('.toggle-container');
+      if (toggleContainer) {
+        toggleContainer.style.display = currentMode.startsWith('s1') ? 'flex' : 'none';
+      }
+    };
+    updateTradebackVisibility(); // Initial state
+
+    // Toggle handlers for 3D model display
+    document.getElementById('toggle-3d').addEventListener('change', (e) => {
+      no3dModels = e.target.checked;
+      // Update data attribute on main container for CSS targeting
+      document.querySelector('.main-content').setAttribute('data-no-3d', no3dModels);
+      // Re-render teams if they exist
+      if (currentFixedTeam.length > 0) {
+        renderTeam(currentFixedTeam, 'fixed-team');
+        if (document.getElementById('battle-team').children.length > 0) {
+          generateBattleTeam();
+        }
+      }
+    });
   });
 
   document.getElementById('btn-fixed-team').onclick = randomizeFullTeam;

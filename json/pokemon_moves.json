@@ -56,6 +56,10 @@
             "display": "Leech Life",
             "type": "Bug"
         },
+        "twineedle": {
+            "display": "Twineedle",
+            "type": "Bug"
+        },
         "lightscreen": {
             "display": "Light Screen",
             "type": "Psychic"
@@ -142,10 +146,6 @@
         },
         "pinmissile": {
             "display": "Pin Missile",
-            "type": "Bug"
-        },
-        "twinneedle": {
-            "display": "Twineedle",
             "type": "Bug"
         },
         "substitute": {

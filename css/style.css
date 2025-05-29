@@ -4,6 +4,36 @@
   --color-card: #2a2a2a;
 }
 
+.move-box.type-normal {background: #888;}
+.move-box.type-fighting { background: #b54;}
+.move-box.type-fire { background: #f84;}
+.move-box.type-electric { background: #fc3;}
+.move-box.type-water { background: #39f;}
+.move-box.type-grass { background: #7c5;}
+.move-box.type-ice { background: #6cf;}
+.move-box.type-poison { background: #a59;}
+.move-box.type-ground { background: #db6;}
+.move-box.type-flying { background: #89f;}
+.move-box.type-psychic { background: #f59;}
+.move-box.type-bug { background: #ab2;}
+.move-box.type-rock { background: #ba6;}
+.move-box.type-ghost { background: #66b;}
+.move-box.type-dragon { background: #76e;}
+.move-box.type-steel { background: #aaa;}
+.move-box.type-dark { background: #444;}
+.move-box.type-fairy { background: #e9e;}
+
+.nav-btn[data-mode="s1Gym"]::before { background-image: url('../assets/s1_gymleadercastle.png'); }
+.nav-btn[data-mode="s1Poke"]::before { background-image: url('../assets/s1_pokecup.png'); }
+.nav-btn[data-mode="s1Prime"]::before { background-image: url('../assets/s1_primecup.png'); }
+.nav-btn[data-mode="s1Pika"]::before { background-image: url('../assets/s1_pikacup.png'); }
+.nav-btn[data-mode="s1Petit"]::before { background-image: url('../assets/s1_petitcup.png'); }
+.nav-btn[data-mode="s2Gym"]::before { background-image: url('../assets/s2_gymleadercastle.png'); }
+.nav-btn[data-mode="s2Poke"]::before { background-image: url('../assets/s2_pokecup.png'); }
+.nav-btn[data-mode="s2Prime"]::before { background-image: url('../assets/s2_primecup.png'); }
+.nav-btn[data-mode="s2Challenge"]::before { background-image: url('../assets/s2_challengecup.png'); }
+.nav-btn[data-mode="s2Petit"]::before { background-image: url('../assets/s2_petitcup.png'); }
+
 /* Layout */
 body {
   margin: 0;
@@ -197,16 +227,6 @@ nav {
   z-index: -1;
   border-radius: 32px;
 }
-.nav-btn[data-mode="s1Gym"]::before { background-image: url('../assets/s1_gymleadercastle.png'); }
-.nav-btn[data-mode="s1Poke"]::before { background-image: url('../assets/s1_pokecup.png'); }
-.nav-btn[data-mode="s1Prime"]::before { background-image: url('../assets/s1_primecup.png'); }
-.nav-btn[data-mode="s1Pika"]::before { background-image: url('../assets/s1_pikacup.png'); }
-.nav-btn[data-mode="s1Petit"]::before { background-image: url('../assets/s1_petitcup.png'); }
-.nav-btn[data-mode="s2Gym"]::before { background-image: url('../assets/s2_gymleadercastle.png'); }
-.nav-btn[data-mode="s2Poke"]::before { background-image: url('../assets/s2_pokecup.png'); }
-.nav-btn[data-mode="s2Prime"]::before { background-image: url('../assets/s2_primecup.png'); }
-.nav-btn[data-mode="s2Challenge"]::before { background-image: url('../assets/s2_challengecup.png'); }
-.nav-btn[data-mode="s2Petit"]::before { background-image: url('../assets/s2_petitcup.png'); }
 
 /* Main Content */
 .main-content {
@@ -224,6 +244,7 @@ nav {
   display: flex;
   align-items: baseline;
   gap: 8px;
+  padding:16px;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -397,13 +418,9 @@ nav {
 }
 
 .profile-img-mask img {
-  width: 150px;
   max-height: 160px;
   max-width: 150px;
-  width: 110%;
   object-fit: contain;
-  display: flex;
-  place-self: self-end;
   display: flex;
 }
 
@@ -481,26 +498,6 @@ nav {
   background: var(--type-normal, #888);
   transition: background 0.2s, border 0.2s;
 }
-.move-box.type-normal {background: #888;}
-.move-box.type-fighting { background: #b54;}
-.move-box.type-fire { background: #f84;}
-.move-box.type-electric { background: #fc3;}
-.move-box.type-water { background: #39f;}
-.move-box.type-grass { background: #7c5;}
-.move-box.type-ice { background: #6cf;}
-.move-box.type-poison { background: #a59;}
-.move-box.type-ground { background: #db6;}
-.move-box.type-flying { background: #89f;}
-.move-box.type-psychic { background: #f59;}
-.move-box.type-bug { background: #ab2;}
-.move-box.type-rock { background: #ba6;}
-.move-box.type-ghost { background: #66b;}
-.move-box.type-dragon { background: #76e;}
-.move-box.type-steel { background: #aaa;}
-.move-box.type-dark { background: #444;}
-.move-box.type-fairy { background: #e9e;}
-
-
 
 .moves-grid {
   display: grid;
@@ -669,10 +666,7 @@ nav {
 
 /* Footer */
 .footer-content {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 16px 0;
-  width: 100%;
+  padding: 16px;
   color: #bbb;
   text-align: center;
   font-size: 0.95rem;
@@ -796,8 +790,56 @@ footer a{
   .battle-team-section, .battle-team-section .cards *{
     padding:0;
   }
-  .footer-content {
-    font-size: 0.8rem;
-    padding: 8px 0;
-  }
+}
+
+/* Options row styling */
+.options-row {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin: -20px 0 20px 0;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-container input[type="checkbox"] {
+  margin-right: 8px;
+  appearance: none;
+  width: 40px;
+  height: 20px;
+  background: #444;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-container input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  background: white;
+  transition: transform 0.3s;
+}
+
+.toggle-container input[type="checkbox"]:checked {
+  background: #e4002b;
+}
+
+.toggle-container input[type="checkbox"]:checked::before {
+  transform: translateX(20px);
+}
+
+.toggle-label {
+  color: #fff;
+  font-size: 1rem;
 }
