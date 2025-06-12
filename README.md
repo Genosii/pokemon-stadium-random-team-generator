@@ -9,4 +9,5 @@ To-do:
 - Add more Unown forms
 - Delete redundant JS
 - Optimize CSS
+
 ✅ Add toggle for animated gen 5 sprites and tradeback moves
