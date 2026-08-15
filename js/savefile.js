@@ -14,6 +14,8 @@ let saveSpeciesData = {};
 let saveMoveData = {};
 let saveItemData = {};
 let saveDataPromise = null;
+let randomizeIVs = false;
+let randomizeEVs = false;
 
 function loadSaveData() {
   if (!saveDataPromise) {
@@ -111,25 +113,45 @@ function expForLevel(level, growthRate) {
 const STAT_EXP_MAX = 65535;
 const SHINY_ATK_DV_OPTIONS = [2, 3, 6, 7, 10, 11, 14, 15];
 
-// Gen 1 has no gender/shiny mechanic - always maximize DVs.
+function randomDv() {
+  return Math.floor(Math.random() * 16); // 0-15
+}
+
+function randomInRange(min, max) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+// Stat Exp (EV) for a single stat: maxed by default, or randomized 0-65535 per stat
+// independently when the "Randomize EVs" toggle is on.
+function pickStatExp() {
+  return randomizeEVs ? Math.floor(Math.random() * (STAT_EXP_MAX + 1)) : STAT_EXP_MAX;
+}
+
+// Gen 1 has no gender/shiny mechanic, so DVs are free to randomize (or maxed by default).
 function pickGen1Dvs() {
+  if (randomizeIVs) {
+    return { atk: randomDv(), def: randomDv(), spd: randomDv(), spc: randomDv() };
+  }
   return { atk: 15, def: 15, spd: 15, spc: 15 };
 }
 
 // Gen 2 DVs need to encode the shininess and gender the app already rolled, since
 // both are derived from DVs rather than stored as separate flags in the real games.
+// When "Randomize IVs" is on, DVs are picked randomly within whatever range still
+// satisfies those hard constraints, instead of always taking the best possible value.
 function pickGen2Dvs(genderRatio, isShiny, wantsFemale) {
   let atk, def, spd, spc;
   const noGenderConstraint = genderRatio === 255 || genderRatio === 0 || genderRatio === 254;
   if (isShiny) {
+    // Shininess is DV-locked in Gen 2 - these three are never negotiable.
     def = 10; spd = 10; spc = 10;
     if (noGenderConstraint) {
-      atk = 15;
+      atk = randomizeIVs ? SHINY_ATK_DV_OPTIONS[Math.floor(Math.random() * SHINY_ATK_DV_OPTIONS.length)] : 15;
     } else {
       const threshold = genderRatio >> 4;
       const valid = SHINY_ATK_DV_OPTIONS.filter(v => wantsFemale ? v <= threshold : v > threshold);
       if (valid.length) {
-        atk = wantsFemale ? Math.max(...valid) : Math.min(...valid);
+        atk = randomizeIVs ? valid[Math.floor(Math.random() * valid.length)] : (wantsFemale ? Math.max(...valid) : Math.min(...valid));
       } else {
         // This species can't be both shiny and the requested gender via DVs alone
         // (a real Gen 2 constraint, e.g. very low female-ratio species) - keep shininess.
@@ -137,8 +159,17 @@ function pickGen2Dvs(genderRatio, isShiny, wantsFemale) {
       }
     }
   } else {
-    def = 15; spd = 15; spc = 15;
-    atk = noGenderConstraint ? 15 : (wantsFemale ? (genderRatio >> 4) : 15);
+    def = randomizeIVs ? randomDv() : 15;
+    spd = randomizeIVs ? randomDv() : 15;
+    spc = randomizeIVs ? randomDv() : 15;
+    if (noGenderConstraint) {
+      atk = randomizeIVs ? randomDv() : 15;
+    } else {
+      const threshold = genderRatio >> 4;
+      atk = wantsFemale
+        ? (randomizeIVs ? randomInRange(0, threshold) : threshold)
+        : (randomizeIVs ? randomInRange(threshold + 1, 15) : 15);
+    }
   }
   return { atk, def, spd, spc };
 }
@@ -164,13 +195,17 @@ function writeGen1PartyMon(buf, offset, mon, trainerId) {
   const dvs = pickGen1Dvs();
   const hpDv = deriveHpDv(dvs.atk, dvs.def, dvs.spd, dvs.spc);
   const level = mon.level;
-  const statExp = STAT_EXP_MAX;
+  const hpExp = pickStatExp();
+  const atkExp = pickStatExp();
+  const defExp = pickStatExp();
+  const spdExp = pickStatExp();
+  const spcExp = pickStatExp();
 
-  const maxHp = calcStat(sp.hp, hpDv, statExp, level, true);
-  const atkStat = calcStat(sp.attack, dvs.atk, statExp, level, false);
-  const defStat = calcStat(sp.defense, dvs.def, statExp, level, false);
-  const spdStat = calcStat(sp.speed, dvs.spd, statExp, level, false);
-  const spcStat = calcStat(sp.specialGen1, dvs.spc, statExp, level, false);
+  const maxHp = calcStat(sp.hp, hpDv, hpExp, level, true);
+  const atkStat = calcStat(sp.attack, dvs.atk, atkExp, level, false);
+  const defStat = calcStat(sp.defense, dvs.def, defExp, level, false);
+  const spdStat = calcStat(sp.speed, dvs.spd, spdExp, level, false);
+  const spcStat = calcStat(sp.specialGen1, dvs.spc, spcExp, level, false);
 
   const moves = mon.moves.slice(0, 4);
   while (moves.length < 4) moves.push(null);
@@ -186,11 +221,11 @@ function writeGen1PartyMon(buf, offset, mon, trainerId) {
   for (let i = 0; i < 4; i++) buf[offset + 0x08 + i] = moveIds[i];
   writeUint16BE(buf, offset + 0x0C, trainerId);
   writeUint24BE(buf, offset + 0x0E, expForLevel(level, sp.growthRate));
-  writeUint16BE(buf, offset + 0x11, statExp); // HP EV
-  writeUint16BE(buf, offset + 0x13, statExp); // Attack EV
-  writeUint16BE(buf, offset + 0x15, statExp); // Defense EV
-  writeUint16BE(buf, offset + 0x17, statExp); // Speed EV
-  writeUint16BE(buf, offset + 0x19, statExp); // Special EV
+  writeUint16BE(buf, offset + 0x11, hpExp); // HP EV
+  writeUint16BE(buf, offset + 0x13, atkExp); // Attack EV
+  writeUint16BE(buf, offset + 0x15, defExp); // Defense EV
+  writeUint16BE(buf, offset + 0x17, spdExp); // Speed EV
+  writeUint16BE(buf, offset + 0x19, spcExp); // Special EV
   const [dvHi, dvLo] = packDvWord(dvs.atk, dvs.def, dvs.spd, dvs.spc);
   buf[offset + 0x1B] = dvHi;
   buf[offset + 0x1C] = dvLo;
@@ -272,14 +307,18 @@ function writeGen2PartyMon(buf, offset, mon, trainerId) {
   const dvs = pickGen2Dvs(sp.genderRatio, !!mon.shiny, wantsFemale);
   const hpDv = deriveHpDv(dvs.atk, dvs.def, dvs.spd, dvs.spc);
   const level = mon.level;
-  const statExp = STAT_EXP_MAX;
+  const hpExp = pickStatExp();
+  const atkExp = pickStatExp();
+  const defExp = pickStatExp();
+  const spdExp = pickStatExp();
+  const spcExp = pickStatExp(); // shared Stat Exp for both SpAtk and SpDef, like the real games
 
-  const maxHp = calcStat(sp.hp, hpDv, statExp, level, true);
-  const atkStat = calcStat(sp.attack, dvs.atk, statExp, level, false);
-  const defStat = calcStat(sp.defense, dvs.def, statExp, level, false);
-  const spdStat = calcStat(sp.speed, dvs.spd, statExp, level, false);
-  const spaStat = calcStat(sp.spAttack, dvs.spc, statExp, level, false);
-  const spdefStat = calcStat(sp.spDefense, dvs.spc, statExp, level, false);
+  const maxHp = calcStat(sp.hp, hpDv, hpExp, level, true);
+  const atkStat = calcStat(sp.attack, dvs.atk, atkExp, level, false);
+  const defStat = calcStat(sp.defense, dvs.def, defExp, level, false);
+  const spdStat = calcStat(sp.speed, dvs.spd, spdExp, level, false);
+  const spaStat = calcStat(sp.spAttack, dvs.spc, spcExp, level, false);
+  const spdefStat = calcStat(sp.spDefense, dvs.spc, spcExp, level, false);
 
   const itemId = mon.item != null && saveItemData[mon.item] != null ? saveItemData[mon.item] : 0;
 
@@ -292,11 +331,11 @@ function writeGen2PartyMon(buf, offset, mon, trainerId) {
   for (let i = 0; i < 4; i++) buf[offset + 0x02 + i] = moveIds[i];
   writeUint16BE(buf, offset + 0x06, trainerId);
   writeUint24BE(buf, offset + 0x08, expForLevel(level, sp.growthRate));
-  writeUint16BE(buf, offset + 0x0B, statExp); // HP EV
-  writeUint16BE(buf, offset + 0x0D, statExp); // Attack EV
-  writeUint16BE(buf, offset + 0x0F, statExp); // Defense EV
-  writeUint16BE(buf, offset + 0x11, statExp); // Speed EV
-  writeUint16BE(buf, offset + 0x13, statExp); // Special EV (shared SpA/SpD)
+  writeUint16BE(buf, offset + 0x0B, hpExp); // HP EV
+  writeUint16BE(buf, offset + 0x0D, atkExp); // Attack EV
+  writeUint16BE(buf, offset + 0x0F, defExp); // Defense EV
+  writeUint16BE(buf, offset + 0x11, spdExp); // Speed EV
+  writeUint16BE(buf, offset + 0x13, spcExp); // Special EV (shared SpA/SpD)
   const [dvHi, dvLo] = packDvWord(dvs.atk, dvs.def, dvs.spd, dvs.spc);
   buf[offset + 0x15] = dvHi;
   buf[offset + 0x16] = dvLo;
@@ -399,6 +438,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!exportBtn) return;
 
   populateExportVersions(currentMode);
+
+  const ivToggle = document.getElementById('toggle-random-ivs');
+  const evToggle = document.getElementById('toggle-random-evs');
+  if (ivToggle) ivToggle.addEventListener('change', e => { randomizeIVs = e.target.checked; });
+  if (evToggle) evToggle.addEventListener('change', e => { randomizeEVs = e.target.checked; });
 
   exportBtn.addEventListener('click', async () => {
     if (!currentFixedTeam.length) {
