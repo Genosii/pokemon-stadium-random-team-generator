@@ -657,7 +657,9 @@ function setMode(mode) {
       document.querySelector('.title-row h1').textContent = "Pokémon Stadium";
     }
     document.getElementById('subtitle').textContent = MODES[mode].name;
-    
+
+    if (typeof populateExportVersions === 'function') populateExportVersions(mode);
+
     // Clear teams
     document.getElementById('fixed-team').innerHTML = '';
     document.getElementById('battle-team').innerHTML = '';

@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <title>Pokémon Stadium 1 & 2 Random Team Generator</title>
   <script src="js/randomize.js" defer></script>
+  <script src="js/savefile.js" defer></script>
 </head>
 <body>
   <button id="sidebar-toggle" aria-label="Open navigation" class="hidden-on-landing">
@@ -79,6 +80,10 @@
         <input type="checkbox" id="toggle-3d">
         <span class="toggle-label">No 3D models</span>
       </label>
+    </div>
+    <div class="options-row export-row">
+      <select id="export-version" aria-label="Game version to export for"></select>
+      <button class="section-profile-btn" id="btn-export-save" title="Downloads a .sav file with your Fixed Team in the party. Rename it to match your ROM's filename and load it in an emulator (or flashcart) alongside that ROM, then connect via Transfer Pak in Stadium.">Export Save File</button>
     </div>
     <div class="teams">
       <div class="team-section" id="fixed-team-section">

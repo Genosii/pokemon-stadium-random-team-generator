@@ -839,6 +839,24 @@ footer a{
   transform: translateX(20px);
 }
 
+.export-row {
+  align-items: center;
+}
+
+#export-version {
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+#btn-export-save {
+  bottom: 0;
+}
+
 .toggle-label {
   color: #fff;
   font-size: 1rem;

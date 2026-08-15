@@ -1,0 +1,1018 @@
+{
+  "absorb": {
+    "id": 71,
+    "pp": 20
+  },
+  "acid": {
+    "id": 51,
+    "pp": 30
+  },
+  "acidarmor": {
+    "id": 151,
+    "pp": 40
+  },
+  "aeroblast": {
+    "id": 177,
+    "pp": 5
+  },
+  "agility": {
+    "id": 97,
+    "pp": 30
+  },
+  "amnesia": {
+    "id": 133,
+    "pp": 20
+  },
+  "ancientpower": {
+    "id": 246,
+    "pp": 5
+  },
+  "attract": {
+    "id": 213,
+    "pp": 15
+  },
+  "aurorabeam": {
+    "id": 62,
+    "pp": 20
+  },
+  "barrage": {
+    "id": 140,
+    "pp": 20
+  },
+  "barrier": {
+    "id": 112,
+    "pp": 30
+  },
+  "batonpass": {
+    "id": 226,
+    "pp": 40
+  },
+  "beatup": {
+    "id": 251,
+    "pp": 10
+  },
+  "bellydrum": {
+    "id": 187,
+    "pp": 10
+  },
+  "bide": {
+    "id": 117,
+    "pp": 10
+  },
+  "bind": {
+    "id": 20,
+    "pp": 20
+  },
+  "bite": {
+    "id": 44,
+    "pp": 25
+  },
+  "blizzard": {
+    "id": 59,
+    "pp": 5
+  },
+  "bodyslam": {
+    "id": 34,
+    "pp": 15
+  },
+  "boneclub": {
+    "id": 125,
+    "pp": 20
+  },
+  "bonemerang": {
+    "id": 155,
+    "pp": 10
+  },
+  "bonerush": {
+    "id": 198,
+    "pp": 10
+  },
+  "bubble": {
+    "id": 145,
+    "pp": 30
+  },
+  "bubblebeam": {
+    "id": 61,
+    "pp": 20
+  },
+  "charm": {
+    "id": 204,
+    "pp": 20
+  },
+  "clamp": {
+    "id": 128,
+    "pp": 10
+  },
+  "cometpunch": {
+    "id": 4,
+    "pp": 15
+  },
+  "confuseray": {
+    "id": 109,
+    "pp": 10
+  },
+  "confusion": {
+    "id": 93,
+    "pp": 25
+  },
+  "constrict": {
+    "id": 132,
+    "pp": 35
+  },
+  "conversion": {
+    "id": 160,
+    "pp": 30
+  },
+  "conversion2": {
+    "id": 176,
+    "pp": 30
+  },
+  "cottonspore": {
+    "id": 178,
+    "pp": 40
+  },
+  "counter": {
+    "id": 68,
+    "pp": 20
+  },
+  "crabhammer": {
+    "id": 152,
+    "pp": 10
+  },
+  "crosschop": {
+    "id": 238,
+    "pp": 5
+  },
+  "crunch": {
+    "id": 242,
+    "pp": 15
+  },
+  "curse": {
+    "id": 174,
+    "pp": 10
+  },
+  "cut": {
+    "id": 15,
+    "pp": 30
+  },
+  "defensecurl": {
+    "id": 111,
+    "pp": 40
+  },
+  "destinybond": {
+    "id": 194,
+    "pp": 5
+  },
+  "detect": {
+    "id": 197,
+    "pp": 5
+  },
+  "dig": {
+    "id": 91,
+    "pp": 10
+  },
+  "disable": {
+    "id": 50,
+    "pp": 20
+  },
+  "dizzypunch": {
+    "id": 146,
+    "pp": 10
+  },
+  "doubleedge": {
+    "id": 38,
+    "pp": 15
+  },
+  "doublekick": {
+    "id": 24,
+    "pp": 30
+  },
+  "doubleslap": {
+    "id": 3,
+    "pp": 10
+  },
+  "doubleteam": {
+    "id": 104,
+    "pp": 15
+  },
+  "dragonbreath": {
+    "id": 225,
+    "pp": 20
+  },
+  "dragonrage": {
+    "id": 82,
+    "pp": 10
+  },
+  "dreameater": {
+    "id": 138,
+    "pp": 15
+  },
+  "drillpeck": {
+    "id": 65,
+    "pp": 20
+  },
+  "dynamicpunch": {
+    "id": 223,
+    "pp": 5
+  },
+  "earthquake": {
+    "id": 89,
+    "pp": 10
+  },
+  "eggbomb": {
+    "id": 121,
+    "pp": 10
+  },
+  "ember": {
+    "id": 52,
+    "pp": 25
+  },
+  "encore": {
+    "id": 227,
+    "pp": 5
+  },
+  "endure": {
+    "id": 203,
+    "pp": 10
+  },
+  "explosion": {
+    "id": 153,
+    "pp": 5
+  },
+  "extremespeed": {
+    "id": 245,
+    "pp": 5
+  },
+  "faintattack": {
+    "id": 185,
+    "pp": 20
+  },
+  "falseswipe": {
+    "id": 206,
+    "pp": 40
+  },
+  "feintattack": {
+    "id": 185,
+    "pp": 20
+  },
+  "fireblast": {
+    "id": 126,
+    "pp": 5
+  },
+  "firepunch": {
+    "id": 7,
+    "pp": 15
+  },
+  "firespin": {
+    "id": 83,
+    "pp": 15
+  },
+  "fissure": {
+    "id": 90,
+    "pp": 5
+  },
+  "flail": {
+    "id": 175,
+    "pp": 15
+  },
+  "flamethrower": {
+    "id": 53,
+    "pp": 15
+  },
+  "flamewheel": {
+    "id": 172,
+    "pp": 25
+  },
+  "flash": {
+    "id": 148,
+    "pp": 20
+  },
+  "fly": {
+    "id": 19,
+    "pp": 15
+  },
+  "focusenergy": {
+    "id": 116,
+    "pp": 30
+  },
+  "foresight": {
+    "id": 193,
+    "pp": 40
+  },
+  "frustration": {
+    "id": 218,
+    "pp": 20
+  },
+  "furyattack": {
+    "id": 31,
+    "pp": 20
+  },
+  "furycutter": {
+    "id": 210,
+    "pp": 20
+  },
+  "furyswipes": {
+    "id": 154,
+    "pp": 15
+  },
+  "futuresight": {
+    "id": 248,
+    "pp": 15
+  },
+  "gigadrain": {
+    "id": 202,
+    "pp": 5
+  },
+  "glare": {
+    "id": 137,
+    "pp": 30
+  },
+  "growl": {
+    "id": 45,
+    "pp": 40
+  },
+  "growth": {
+    "id": 74,
+    "pp": 40
+  },
+  "guillotine": {
+    "id": 12,
+    "pp": 5
+  },
+  "gust": {
+    "id": 16,
+    "pp": 35
+  },
+  "harden": {
+    "id": 106,
+    "pp": 30
+  },
+  "haze": {
+    "id": 114,
+    "pp": 30
+  },
+  "headbutt": {
+    "id": 29,
+    "pp": 15
+  },
+  "healbell": {
+    "id": 215,
+    "pp": 5
+  },
+  "hiddenpower": {
+    "id": 237,
+    "pp": 15
+  },
+  "highjumpkick": {
+    "id": 136,
+    "pp": 20
+  },
+  "hijumpkick": {
+    "id": 136,
+    "pp": 20
+  },
+  "hornattack": {
+    "id": 30,
+    "pp": 25
+  },
+  "horndrill": {
+    "id": 32,
+    "pp": 5
+  },
+  "hydropump": {
+    "id": 56,
+    "pp": 5
+  },
+  "hyperbeam": {
+    "id": 63,
+    "pp": 5
+  },
+  "hyperfang": {
+    "id": 158,
+    "pp": 15
+  },
+  "hypnosis": {
+    "id": 95,
+    "pp": 20
+  },
+  "icebeam": {
+    "id": 58,
+    "pp": 10
+  },
+  "icepunch": {
+    "id": 8,
+    "pp": 15
+  },
+  "icywind": {
+    "id": 196,
+    "pp": 15
+  },
+  "irontail": {
+    "id": 231,
+    "pp": 15
+  },
+  "jumpkick": {
+    "id": 26,
+    "pp": 25
+  },
+  "karatechop": {
+    "id": 2,
+    "pp": 25
+  },
+  "kinesis": {
+    "id": 134,
+    "pp": 15
+  },
+  "leechlife": {
+    "id": 141,
+    "pp": 15
+  },
+  "leechseed": {
+    "id": 73,
+    "pp": 10
+  },
+  "leer": {
+    "id": 43,
+    "pp": 30
+  },
+  "lick": {
+    "id": 122,
+    "pp": 30
+  },
+  "lightscreen": {
+    "id": 113,
+    "pp": 30
+  },
+  "lockon": {
+    "id": 199,
+    "pp": 5
+  },
+  "lovelykiss": {
+    "id": 142,
+    "pp": 10
+  },
+  "lowkick": {
+    "id": 67,
+    "pp": 20
+  },
+  "machpunch": {
+    "id": 183,
+    "pp": 30
+  },
+  "magnitude": {
+    "id": 222,
+    "pp": 30
+  },
+  "meanlook": {
+    "id": 212,
+    "pp": 5
+  },
+  "meditate": {
+    "id": 96,
+    "pp": 40
+  },
+  "megadrain": {
+    "id": 72,
+    "pp": 10
+  },
+  "megahorn": {
+    "id": 224,
+    "pp": 10
+  },
+  "megakick": {
+    "id": 25,
+    "pp": 5
+  },
+  "megapunch": {
+    "id": 5,
+    "pp": 20
+  },
+  "metalclaw": {
+    "id": 232,
+    "pp": 35
+  },
+  "metronome": {
+    "id": 118,
+    "pp": 10
+  },
+  "milkdrink": {
+    "id": 208,
+    "pp": 10
+  },
+  "mimic": {
+    "id": 102,
+    "pp": 10
+  },
+  "mindreader": {
+    "id": 170,
+    "pp": 5
+  },
+  "minimize": {
+    "id": 107,
+    "pp": 20
+  },
+  "mirrorcoat": {
+    "id": 243,
+    "pp": 20
+  },
+  "mirrormove": {
+    "id": 119,
+    "pp": 20
+  },
+  "mist": {
+    "id": 54,
+    "pp": 30
+  },
+  "moonlight": {
+    "id": 236,
+    "pp": 5
+  },
+  "morningsun": {
+    "id": 234,
+    "pp": 5
+  },
+  "mudslap": {
+    "id": 189,
+    "pp": 10
+  },
+  "nightmare": {
+    "id": 171,
+    "pp": 15
+  },
+  "nightshade": {
+    "id": 101,
+    "pp": 15
+  },
+  "octazooka": {
+    "id": 190,
+    "pp": 10
+  },
+  "outrage": {
+    "id": 200,
+    "pp": 15
+  },
+  "painsplit": {
+    "id": 220,
+    "pp": 20
+  },
+  "payday": {
+    "id": 6,
+    "pp": 20
+  },
+  "peck": {
+    "id": 64,
+    "pp": 35
+  },
+  "perishsong": {
+    "id": 195,
+    "pp": 5
+  },
+  "petaldance": {
+    "id": 80,
+    "pp": 20
+  },
+  "pinmissile": {
+    "id": 42,
+    "pp": 20
+  },
+  "poisongas": {
+    "id": 139,
+    "pp": 40
+  },
+  "poisonpowder": {
+    "id": 77,
+    "pp": 35
+  },
+  "poisonsting": {
+    "id": 40,
+    "pp": 35
+  },
+  "pound": {
+    "id": 1,
+    "pp": 35
+  },
+  "powdersnow": {
+    "id": 181,
+    "pp": 25
+  },
+  "present": {
+    "id": 217,
+    "pp": 15
+  },
+  "protect": {
+    "id": 182,
+    "pp": 10
+  },
+  "psybeam": {
+    "id": 60,
+    "pp": 20
+  },
+  "psychic": {
+    "id": 94,
+    "pp": 10
+  },
+  "psychup": {
+    "id": 244,
+    "pp": 10
+  },
+  "psywave": {
+    "id": 149,
+    "pp": 15
+  },
+  "pursuit": {
+    "id": 228,
+    "pp": 20
+  },
+  "quickattack": {
+    "id": 98,
+    "pp": 30
+  },
+  "rage": {
+    "id": 99,
+    "pp": 20
+  },
+  "raindance": {
+    "id": 240,
+    "pp": 5
+  },
+  "rapidspin": {
+    "id": 229,
+    "pp": 40
+  },
+  "razorleaf": {
+    "id": 75,
+    "pp": 25
+  },
+  "razorwind": {
+    "id": 13,
+    "pp": 10
+  },
+  "recover": {
+    "id": 105,
+    "pp": 20
+  },
+  "reflect": {
+    "id": 115,
+    "pp": 20
+  },
+  "rest": {
+    "id": 156,
+    "pp": 10
+  },
+  "return": {
+    "id": 216,
+    "pp": 20
+  },
+  "reversal": {
+    "id": 179,
+    "pp": 15
+  },
+  "roar": {
+    "id": 46,
+    "pp": 20
+  },
+  "rockslide": {
+    "id": 157,
+    "pp": 10
+  },
+  "rocksmash": {
+    "id": 249,
+    "pp": 15
+  },
+  "rockthrow": {
+    "id": 88,
+    "pp": 15
+  },
+  "rollingkick": {
+    "id": 27,
+    "pp": 15
+  },
+  "rollout": {
+    "id": 205,
+    "pp": 20
+  },
+  "sacredfire": {
+    "id": 221,
+    "pp": 5
+  },
+  "safeguard": {
+    "id": 219,
+    "pp": 25
+  },
+  "sandattack": {
+    "id": 28,
+    "pp": 15
+  },
+  "sandstorm": {
+    "id": 201,
+    "pp": 10
+  },
+  "scaryface": {
+    "id": 184,
+    "pp": 10
+  },
+  "scratch": {
+    "id": 10,
+    "pp": 35
+  },
+  "screech": {
+    "id": 103,
+    "pp": 40
+  },
+  "seismictoss": {
+    "id": 69,
+    "pp": 20
+  },
+  "selfdestruct": {
+    "id": 120,
+    "pp": 5
+  },
+  "shadowball": {
+    "id": 247,
+    "pp": 15
+  },
+  "sharpen": {
+    "id": 159,
+    "pp": 30
+  },
+  "sing": {
+    "id": 47,
+    "pp": 15
+  },
+  "sketch": {
+    "id": 166,
+    "pp": 1
+  },
+  "skullbash": {
+    "id": 130,
+    "pp": 15
+  },
+  "skyattack": {
+    "id": 143,
+    "pp": 5
+  },
+  "slam": {
+    "id": 21,
+    "pp": 20
+  },
+  "slash": {
+    "id": 163,
+    "pp": 20
+  },
+  "sleeppowder": {
+    "id": 79,
+    "pp": 15
+  },
+  "sleeptalk": {
+    "id": 214,
+    "pp": 10
+  },
+  "sludge": {
+    "id": 124,
+    "pp": 20
+  },
+  "sludgebomb": {
+    "id": 188,
+    "pp": 10
+  },
+  "smog": {
+    "id": 123,
+    "pp": 20
+  },
+  "smokescreen": {
+    "id": 108,
+    "pp": 20
+  },
+  "snore": {
+    "id": 173,
+    "pp": 15
+  },
+  "softboiled": {
+    "id": 135,
+    "pp": 10
+  },
+  "solarbeam": {
+    "id": 76,
+    "pp": 10
+  },
+  "sonicboom": {
+    "id": 49,
+    "pp": 20
+  },
+  "spark": {
+    "id": 209,
+    "pp": 20
+  },
+  "spiderweb": {
+    "id": 169,
+    "pp": 10
+  },
+  "spikecannon": {
+    "id": 131,
+    "pp": 15
+  },
+  "spikes": {
+    "id": 191,
+    "pp": 20
+  },
+  "spite": {
+    "id": 180,
+    "pp": 10
+  },
+  "splash": {
+    "id": 150,
+    "pp": 40
+  },
+  "spore": {
+    "id": 147,
+    "pp": 15
+  },
+  "steelwing": {
+    "id": 211,
+    "pp": 25
+  },
+  "stomp": {
+    "id": 23,
+    "pp": 20
+  },
+  "strength": {
+    "id": 70,
+    "pp": 15
+  },
+  "stringshot": {
+    "id": 81,
+    "pp": 40
+  },
+  "struggle": {
+    "id": 165,
+    "pp": 1
+  },
+  "stunspore": {
+    "id": 78,
+    "pp": 30
+  },
+  "submission": {
+    "id": 66,
+    "pp": 25
+  },
+  "substitute": {
+    "id": 164,
+    "pp": 10
+  },
+  "sunnyday": {
+    "id": 241,
+    "pp": 5
+  },
+  "superfang": {
+    "id": 162,
+    "pp": 10
+  },
+  "supersonic": {
+    "id": 48,
+    "pp": 20
+  },
+  "surf": {
+    "id": 57,
+    "pp": 15
+  },
+  "swagger": {
+    "id": 207,
+    "pp": 15
+  },
+  "sweetkiss": {
+    "id": 186,
+    "pp": 10
+  },
+  "sweetscent": {
+    "id": 230,
+    "pp": 20
+  },
+  "swift": {
+    "id": 129,
+    "pp": 20
+  },
+  "swordsdance": {
+    "id": 14,
+    "pp": 30
+  },
+  "synthesis": {
+    "id": 235,
+    "pp": 5
+  },
+  "tackle": {
+    "id": 33,
+    "pp": 35
+  },
+  "tailwhip": {
+    "id": 39,
+    "pp": 30
+  },
+  "takedown": {
+    "id": 36,
+    "pp": 20
+  },
+  "teleport": {
+    "id": 100,
+    "pp": 20
+  },
+  "thief": {
+    "id": 168,
+    "pp": 10
+  },
+  "thrash": {
+    "id": 37,
+    "pp": 20
+  },
+  "thunder": {
+    "id": 87,
+    "pp": 10
+  },
+  "thunderbolt": {
+    "id": 85,
+    "pp": 15
+  },
+  "thunderpunch": {
+    "id": 9,
+    "pp": 15
+  },
+  "thundershock": {
+    "id": 84,
+    "pp": 30
+  },
+  "thunderwave": {
+    "id": 86,
+    "pp": 20
+  },
+  "toxic": {
+    "id": 92,
+    "pp": 10
+  },
+  "transform": {
+    "id": 144,
+    "pp": 10
+  },
+  "triattack": {
+    "id": 161,
+    "pp": 10
+  },
+  "triplekick": {
+    "id": 167,
+    "pp": 10
+  },
+  "twineedle": {
+    "id": 41,
+    "pp": 20
+  },
+  "twister": {
+    "id": 239,
+    "pp": 20
+  },
+  "vicegrip": {
+    "id": 11,
+    "pp": 30
+  },
+  "vinewhip": {
+    "id": 22,
+    "pp": 10
+  },
+  "visegrip": {
+    "id": 11,
+    "pp": 30
+  },
+  "vitalthrow": {
+    "id": 233,
+    "pp": 10
+  },
+  "waterfall": {
+    "id": 127,
+    "pp": 15
+  },
+  "watergun": {
+    "id": 55,
+    "pp": 25
+  },
+  "whirlpool": {
+    "id": 250,
+    "pp": 15
+  },
+  "whirlwind": {
+    "id": 18,
+    "pp": 20
+  },
+  "wingattack": {
+    "id": 17,
+    "pp": 35
+  },
+  "withdraw": {
+    "id": 110,
+    "pp": 40
+  },
+  "wrap": {
+    "id": 35,
+    "pp": 20
+  },
+  "zapcannon": {
+    "id": 192,
+    "pp": 5
+  }
+}
