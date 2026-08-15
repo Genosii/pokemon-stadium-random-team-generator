@@ -31,7 +31,7 @@ function loadSaveData() {
 }
 
 function normalizeMoveKey(move) {
-  return move.toLowerCase().replace(/\s+/g, "");
+  return move.toLowerCase().replace(/\s+/g, '');
 }
 
 // Encodes uppercase text into the Gen 1/2 charmap (A-Z, space), 0x50-terminated,
