@@ -374,6 +374,41 @@ function closeVersionSelect() {
   select.querySelector('.version-select-trigger').setAttribute('aria-expanded', 'false');
 }
 
+function openVersionSelect(focusOption) {
+  const select = document.getElementById('export-version');
+  select.classList.add('open');
+  select.querySelector('.version-select-trigger').setAttribute('aria-expanded', 'true');
+  if (focusOption) {
+    const active = select.querySelector('.version-select-option.active') || select.querySelector('.version-select-option');
+    if (active) active.focus();
+  }
+}
+
+// Arrow keys/Enter/Escape, matching what a native select gives for free
+function handleVersionSelectKeys(e) {
+  const select = document.getElementById('export-version');
+  const options = [...select.querySelectorAll('.version-select-option')];
+  const isOpen = select.classList.contains('open');
+  const current = options.indexOf(document.activeElement);
+
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (!isOpen) return openVersionSelect(true);
+    const next = e.key === 'ArrowDown'
+      ? Math.min(current + 1, options.length - 1)
+      : Math.max(current - 1, 0);
+    options[next < 0 ? 0 : next].focus();
+  } else if (isOpen && (e.key === 'Enter' || e.key === ' ') && current >= 0) {
+    e.preventDefault();
+    options[current].click();
+  } else if (e.key === 'Escape' && isOpen) {
+    closeVersionSelect();
+    select.querySelector('.version-select-trigger').focus();
+  } else if (e.key === 'Tab' && isOpen) {
+    closeVersionSelect();
+  }
+}
+
 function setSelectedVersion(value, label) {
   const select = document.getElementById('export-version');
   selectedVersion = value;
@@ -399,9 +434,11 @@ function populateExportVersions(mode) {
     li.dataset.value = value;
     li.textContent = label;
     li.setAttribute('role', 'option');
+    li.tabIndex = -1;
     li.addEventListener('click', () => {
       setSelectedVersion(value, label);
       closeVersionSelect();
+      select.querySelector('.version-select-trigger').focus();
     });
     list.appendChild(li);
   });
@@ -419,17 +456,18 @@ document.addEventListener('DOMContentLoaded', () => {
   populateExportVersions(currentMode);
 
   trigger.addEventListener('click', () => {
-    const isOpen = versionSelect.classList.toggle('open');
-    trigger.setAttribute('aria-expanded', isOpen);
+    if (versionSelect.classList.contains('open')) {
+      closeVersionSelect();
+    } else {
+      openVersionSelect(false);
+    }
   });
 
-  // Close when clicking away or pressing Escape
+  // Close when clicking away
   document.addEventListener('click', (e) => {
     if (!versionSelect.contains(e.target)) closeVersionSelect();
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeVersionSelect();
-  });
+  versionSelect.addEventListener('keydown', handleVersionSelectKeys);
 
   exportBtn.addEventListener('click', async () => {
     if (!currentFixedTeam.length) {

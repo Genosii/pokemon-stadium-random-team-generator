@@ -754,6 +754,17 @@ footer a{
     padding: 6px 12px;
   }
 
+  /* Stack the export controls rather than letting them run off-screen */
+  .export-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .version-select-trigger {
+    font-size: 1rem;
+    padding: 10px 40px;
+  }
+
   .pokemon-card{
     flex-direction: column;
     gap:10px;
@@ -795,9 +806,11 @@ footer a{
 /* Options row styling */
 .options-row {
   display: flex;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: 16px 24px;
   justify-content: center;
   margin: -20px 0 20px 0;
+  padding: 0 16px;
 }
 
 .toggle-container {
@@ -846,7 +859,8 @@ footer a{
 /* Custom dropdown - a native select can't be styled consistently across browsers */
 .version-select {
   position: relative;
-  min-width: 300px;
+  width: 300px;
+  max-width: 100%;
 }
 
 .version-select-trigger {
