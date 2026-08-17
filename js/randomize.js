@@ -35,6 +35,8 @@ const PIKA_CUP_POKEMON = [
 // Add new variables for toggles
 let noTradebackMoves = false;
 let no3dModels = false;
+let randomizeIVs = false;
+let randomizeEVs = false;
 
 // Gen 2 move exclusion list for Stadium 1
 const GEN2_MOVE_EXCLUSIONS = [
@@ -44,8 +46,93 @@ const GEN2_MOVE_EXCLUSIONS = [
 // toggle state variables
 let pokemonData = {};
 let moveData = {};
+let speciesData = {};
 let currentMode = 's1gym';
 let currentFixedTeam = [];
+
+// Gen 2 derives gender, shininess and Hidden Power's type from a Pokémon's DVs, so
+// they're rolled once when the team is generated and shared by the cards and the
+// save export instead of being decided separately in each place.
+const SHINY_ATK_DV_OPTIONS = [2, 3, 6, 7, 10, 11, 14, 15];
+
+const HIDDEN_POWER_TYPES = [
+  "Fighting", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost", "Steel",
+  "Fire", "Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark"
+];
+
+function randomDv() {
+  return Math.floor(Math.random() * 16); // 0-15
+}
+
+function randomInRange(min, max) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+// Gen 1 has no gender or shininess tied to DVs, so they're free to randomize.
+function pickGen1Dvs() {
+  if (randomizeIVs) {
+    return { atk: randomDv(), def: randomDv(), spd: randomDv(), spc: randomDv() };
+  }
+  return { atk: 15, def: 15, spd: 15, spc: 15 };
+}
+
+// Gen 2 DVs have to encode the shininess and gender already rolled for the card.
+// When randomizing, DVs are picked from whatever range still satisfies those.
+function pickGen2Dvs(genderRatio, isShiny, wantsFemale) {
+  let atk, def, spd, spc;
+  const noGenderConstraint = genderRatio === 255 || genderRatio === 0 || genderRatio === 254;
+  if (isShiny) {
+    // Shininess is DV-locked in Gen 2 - these three are never negotiable.
+    def = 10; spd = 10; spc = 10;
+    if (noGenderConstraint) {
+      atk = randomizeIVs ? SHINY_ATK_DV_OPTIONS[Math.floor(Math.random() * SHINY_ATK_DV_OPTIONS.length)] : 15;
+    } else {
+      const threshold = genderRatio >> 4;
+      const valid = SHINY_ATK_DV_OPTIONS.filter(v => wantsFemale ? v <= threshold : v > threshold);
+      if (valid.length) {
+        atk = randomizeIVs ? valid[Math.floor(Math.random() * valid.length)] : (wantsFemale ? Math.max(...valid) : Math.min(...valid));
+      } else {
+        // This species can't be both shiny and the requested gender via DVs alone
+        // (a real Gen 2 constraint, e.g. very low female-ratio species) - keep shininess.
+        atk = wantsFemale ? Math.min(...SHINY_ATK_DV_OPTIONS) : Math.max(...SHINY_ATK_DV_OPTIONS);
+      }
+    }
+  } else {
+    def = randomizeIVs ? randomDv() : 15;
+    spd = randomizeIVs ? randomDv() : 15;
+    spc = randomizeIVs ? randomDv() : 15;
+    if (noGenderConstraint) {
+      atk = randomizeIVs ? randomDv() : 15;
+    } else {
+      const threshold = genderRatio >> 4;
+      atk = wantsFemale
+        ? (randomizeIVs ? randomInRange(0, threshold) : threshold)
+        : (randomizeIVs ? randomInRange(threshold + 1, 15) : 15);
+    }
+  }
+  return { atk, def, spd, spc };
+}
+
+function rollDvsFor(name, isShiny, wantsFemale) {
+  if (!currentMode.startsWith('s2')) return pickGen1Dvs();
+  const genderRatio = speciesData[name] ? speciesData[name].genderRatio : 255;
+  return pickGen2Dvs(genderRatio, isShiny, wantsFemale);
+}
+
+// Hidden Power's type: 4 * (Attack DV & 3) + (Defense DV & 3), indexing the type
+// order the games walk through (Normal, Bird and the unused types are skipped).
+function getHiddenPowerType(dvs) {
+  return HIDDEN_POWER_TYPES[4 * (dvs.atk & 3) + (dvs.def & 3)];
+}
+
+// Hidden Power's base power, from the top bit of each DV plus the low Special bits.
+function getHiddenPowerPower(dvs) {
+  const bits = ((dvs.atk >> 3) & 1) * 8
+    + ((dvs.def >> 3) & 1) * 4
+    + ((dvs.spd >> 3) & 1) * 2
+    + ((dvs.spc >> 3) & 1);
+  return Math.floor((5 * bits + (dvs.spc & 3)) / 2) + 31;
+}
 
 // Helper: get only Gen 1-legal moves for Stadium 1
 function getLegalStadium1Moves(pokemonName) {
@@ -71,20 +158,14 @@ function getLegalStadium1Moves(pokemonName) {
   });
 }
 
-function getMoveType(move) {
+function getMoveType(move, poke) {
   let normalized = move.toLowerCase().replace(/\s+/g, "");
-  
-  // Special case for Hidden Power - assign random type
+
+  // Hidden Power's type is derived from the Pokémon's DVs, not stored on the move
   if (normalized === "hiddenpower") {
-    const types = [
-      "fighting", "flying", "poison", "ground", 
-      "rock", "bug", "ghost", "steel", "fire", 
-      "water", "grass", "electric", "psychic", "ice", 
-      "dragon", "dark"
-    ];
-    return types[Math.floor(Math.random() * types.length)];
+    return poke?.dvs ? getHiddenPowerType(poke.dvs).toLowerCase() : "normal";
   }
-  
+
   return moveData?.moveTypes?.[normalized]?.type?.toLowerCase() || "normal";
 }
 
@@ -192,7 +273,14 @@ function renderTeam(team, containerId, showMoves = true) {
         const moves = Array.isArray(poke.moves) ? poke.moves.map(move => {
           const moveKey = move.toLowerCase().replace(/\s+/g, "");
           const moveObj = moveData?.moveTypes?.[moveKey];
-          return `<div class="move-box type-${getMoveType(move)}">${moveObj && moveObj.display ? moveObj.display : move}</div>`;
+          let label = moveObj && moveObj.display ? moveObj.display : move;
+          let title = '';
+          if (moveKey === "hiddenpower" && poke.dvs) {
+            const hpType = getHiddenPowerType(poke.dvs);
+            label = `${label} (${hpType})`;
+            title = ` title="${hpType} type, ${getHiddenPowerPower(poke.dvs)} base power (from DVs)"`;
+          }
+          return `<div class="move-box type-${getMoveType(move, poke)}"${title}>${label}</div>`;
         }).join('') : '';
         movesHtml = `
           <div class="moves-section moves-grid"">
@@ -548,15 +636,17 @@ function randomizeFullTeam() {
       
       // Add shiny property for Stadium 2
       const isShinyPokemon = currentMode.startsWith('s2') && isShiny();
-      
+      const gender = getRandomGender(name);
+
       return {
         name,
         dex: pokemonData[name].dex,
         moves,
         level: modeConfig?.fixed || modeConfig?.level || getLevelForMode(currentMode),
-        gender: getRandomGender(name),
+        gender,
         item: getRandomItem(name),
-        shiny: isShinyPokemon
+        shiny: isShinyPokemon,
+        dvs: rollDvsFor(name, isShinyPokemon, gender.includes('♀'))
       };
     }).filter(p => p !== null);
 
@@ -689,14 +779,16 @@ function normalizePokemonName(name) {
 document.addEventListener('DOMContentLoaded', () => {
   Promise.all([
     fetch('json/pokemon_data.json').then(res => res.json()).catch(() => ({})),
-    fetch('json/pokemon_moves.json').then(res => res.json()).catch(() => ({}))
-  ]).then(([pokeData, moveJson]) => {
+    fetch('json/pokemon_moves.json').then(res => res.json()).catch(() => ({})),
+    fetch('json/pokemon_species.json').then(res => res.json()).catch(() => ({}))
+  ]).then(([pokeData, moveJson, speciesJson]) => {
     if (!pokeData || !moveJson) {
       console.error('Failed to load required data');
       return;
     }
     pokemonData = pokeData;
     moveData = moveJson;
+    speciesData = speciesJson;
 
     // Add toggle handlers
     const tradebackToggle = document.getElementById('toggle-tradeback');
@@ -728,6 +820,22 @@ document.addEventListener('DOMContentLoaded', () => {
           generateBattleTeam();
         }
       }
+    });
+
+    // Re-roll DVs in place so Hidden Power's type follows the new setting
+    document.getElementById('toggle-random-ivs').addEventListener('change', (e) => {
+      randomizeIVs = e.target.checked;
+      if (currentFixedTeam.length > 0) {
+        currentFixedTeam.forEach(poke => {
+          poke.dvs = rollDvsFor(poke.name, poke.shiny, poke.gender.includes('♀'));
+        });
+        renderTeam(currentFixedTeam, 'fixed-team');
+      }
+    });
+
+    // Stat EXP only affects the exported save, so no re-render needed
+    document.getElementById('toggle-random-evs').addEventListener('change', (e) => {
+      randomizeEVs = e.target.checked;
     });
   });
 

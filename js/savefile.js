@@ -10,21 +10,18 @@ const GEN1_CHAR_A = 0x80;
 const TEXT_TERMINATOR = 0x50;
 const TEXT_SPACE = 0x7F;
 
-let saveSpeciesData = {};
 let saveMoveData = {};
 let saveItemData = {};
 let saveDataPromise = null;
-let randomizeIVs = false;
-let randomizeEVs = false;
 
+// Species base stats/DV data is already loaded by randomize.js into speciesData,
+// so only the numeric move and item IDs are fetched here, on first export.
 function loadSaveData() {
   if (!saveDataPromise) {
     saveDataPromise = Promise.all([
-      fetch('json/pokemon_species.json').then(res => res.json()),
       fetch('json/move_ids.json').then(res => res.json()),
       fetch('json/item_ids.json').then(res => res.json())
-    ]).then(([species, moves, items]) => {
-      saveSpeciesData = species;
+    ]).then(([moves, items]) => {
       saveMoveData = moves;
       saveItemData = items;
     });
@@ -111,15 +108,7 @@ function expForLevel(level, growthRate) {
 }
 
 const STAT_EXP_MAX = 65535;
-const SHINY_ATK_DV_OPTIONS = [2, 3, 6, 7, 10, 11, 14, 15];
-
-function randomDv() {
-  return Math.floor(Math.random() * 16); // 0-15
-}
-
-function randomInRange(min, max) {
-  return min + Math.floor(Math.random() * (max - min + 1));
-}
+const MAX_DVS = { atk: 15, def: 15, spd: 15, spc: 15 };
 
 // Stat Exp (EV) for a single stat: maxed by default, or randomized 0-65535 per stat
 // independently when the "Randomize EVs" toggle is on.
@@ -127,51 +116,10 @@ function pickStatExp() {
   return randomizeEVs ? Math.floor(Math.random() * (STAT_EXP_MAX + 1)) : STAT_EXP_MAX;
 }
 
-// Gen 1 has no gender/shiny mechanic, so DVs are free to randomize (or maxed by default).
-function pickGen1Dvs() {
-  if (randomizeIVs) {
-    return { atk: randomDv(), def: randomDv(), spd: randomDv(), spc: randomDv() };
-  }
-  return { atk: 15, def: 15, spd: 15, spc: 15 };
-}
-
-// Gen 2 DVs need to encode the shininess and gender the app already rolled, since
-// both are derived from DVs rather than stored as separate flags in the real games.
-// When "Randomize IVs" is on, DVs are picked randomly within whatever range still
-// satisfies those hard constraints, instead of always taking the best possible value.
-function pickGen2Dvs(genderRatio, isShiny, wantsFemale) {
-  let atk, def, spd, spc;
-  const noGenderConstraint = genderRatio === 255 || genderRatio === 0 || genderRatio === 254;
-  if (isShiny) {
-    // Shininess is DV-locked in Gen 2 - these three are never negotiable.
-    def = 10; spd = 10; spc = 10;
-    if (noGenderConstraint) {
-      atk = randomizeIVs ? SHINY_ATK_DV_OPTIONS[Math.floor(Math.random() * SHINY_ATK_DV_OPTIONS.length)] : 15;
-    } else {
-      const threshold = genderRatio >> 4;
-      const valid = SHINY_ATK_DV_OPTIONS.filter(v => wantsFemale ? v <= threshold : v > threshold);
-      if (valid.length) {
-        atk = randomizeIVs ? valid[Math.floor(Math.random() * valid.length)] : (wantsFemale ? Math.max(...valid) : Math.min(...valid));
-      } else {
-        // This species can't be both shiny and the requested gender via DVs alone
-        // (a real Gen 2 constraint, e.g. very low female-ratio species) - keep shininess.
-        atk = wantsFemale ? Math.min(...SHINY_ATK_DV_OPTIONS) : Math.max(...SHINY_ATK_DV_OPTIONS);
-      }
-    }
-  } else {
-    def = randomizeIVs ? randomDv() : 15;
-    spd = randomizeIVs ? randomDv() : 15;
-    spc = randomizeIVs ? randomDv() : 15;
-    if (noGenderConstraint) {
-      atk = randomizeIVs ? randomDv() : 15;
-    } else {
-      const threshold = genderRatio >> 4;
-      atk = wantsFemale
-        ? (randomizeIVs ? randomInRange(0, threshold) : threshold)
-        : (randomizeIVs ? randomInRange(threshold + 1, 15) : 15);
-    }
-  }
-  return { atk, def, spd, spc };
+// DVs are rolled when the team is generated (see randomize.js) so that the cards and
+// the save agree on gender, shininess and Hidden Power's type.
+function dvsFor(mon) {
+  return mon.dvs || MAX_DVS;
 }
 
 function moveInfoFor(moveName) {
@@ -191,8 +139,8 @@ function gen1Checksum(buf) {
 }
 
 function writeGen1PartyMon(buf, offset, mon, trainerId) {
-  const sp = saveSpeciesData[mon.name];
-  const dvs = pickGen1Dvs();
+  const sp = speciesData[mon.name];
+  const dvs = dvsFor(mon);
   const hpDv = deriveHpDv(dvs.atk, dvs.def, dvs.spd, dvs.spc);
   const level = mon.level;
   const hpExp = pickStatExp();
@@ -253,7 +201,7 @@ function buildGen1Save(team) {
   buf.set(encodeGameText(trainerName, 7), 0x2598);
 
   team.forEach(mon => {
-    const dex = saveSpeciesData[mon.name].dex;
+    const dex = speciesData[mon.name].dex;
     const byteIdx = Math.floor((dex - 1) / 8);
     const bitIdx = (dex - 1) % 8;
     buf[0x25A3 + byteIdx] |= (1 << bitIdx); // Pokédex owned
@@ -265,7 +213,7 @@ function buildGen1Save(team) {
   writeUint16BE(buf, 0x2605, trainerId);
 
   buf[0x2F2C] = team.length; // party count
-  team.forEach((mon, i) => { buf[0x2F2D + i] = saveSpeciesData[mon.name].gen1Internal; });
+  team.forEach((mon, i) => { buf[0x2F2D + i] = speciesData[mon.name].gen1Internal; });
   buf[0x2F2D + team.length] = 0xFF;
 
   team.forEach((mon, i) => {
@@ -302,9 +250,8 @@ function gen2Checksum(buf, start, endExclusive) {
 }
 
 function writeGen2PartyMon(buf, offset, mon, trainerId) {
-  const sp = saveSpeciesData[mon.name];
-  const wantsFemale = (mon.gender || '').indexOf('♀') !== -1; // ♀
-  const dvs = pickGen2Dvs(sp.genderRatio, !!mon.shiny, wantsFemale);
+  const sp = speciesData[mon.name];
+  const dvs = dvsFor(mon);
   const hpDv = deriveHpDv(dvs.atk, dvs.def, dvs.spd, dvs.spc);
   const level = mon.level;
   const hpExp = pickStatExp();
@@ -378,7 +325,7 @@ function buildGen2Save(team, versionKey) {
   buf[off.greenName] = TEXT_TERMINATOR;
 
   team.forEach(mon => {
-    const dex = saveSpeciesData[mon.name].dex;
+    const dex = speciesData[mon.name].dex;
     const byteIdx = Math.floor((dex - 1) / 8);
     const bitIdx = (dex - 1) % 8;
     buf[off.dexCaught + byteIdx] |= (1 << bitIdx);
@@ -386,7 +333,7 @@ function buildGen2Save(team, versionKey) {
   });
 
   buf[off.party] = team.length;
-  team.forEach((mon, i) => { buf[off.party + 1 + i] = saveSpeciesData[mon.name].dex; });
+  team.forEach((mon, i) => { buf[off.party + 1 + i] = speciesData[mon.name].dex; });
   buf[off.party + 7] = 0xFF;
 
   const structBase = off.party + 8;
@@ -418,31 +365,71 @@ function downloadSaveFile(bytes, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+let selectedVersion = 'red';
+
+function closeVersionSelect() {
+  const select = document.getElementById('export-version');
+  if (!select) return;
+  select.classList.remove('open');
+  select.querySelector('.version-select-trigger').setAttribute('aria-expanded', 'false');
+}
+
+function setSelectedVersion(value, label) {
+  const select = document.getElementById('export-version');
+  selectedVersion = value;
+  select.querySelector('.version-select-label').textContent = label;
+  select.querySelectorAll('.version-select-option').forEach(opt => {
+    const isActive = opt.dataset.value === value;
+    opt.classList.toggle('active', isActive);
+    opt.setAttribute('aria-selected', isActive);
+  });
+}
+
 function populateExportVersions(mode) {
   const select = document.getElementById('export-version');
   if (!select) return;
-  select.innerHTML = '';
+  const list = select.querySelector('.version-select-list');
+  list.innerHTML = '';
   const options = mode.startsWith('s1')
     ? [['red', 'Pokémon Red'], ['blue', 'Pokémon Blue'], ['yellow', 'Pokémon Yellow']]
     : [['crystal', 'Pokémon Crystal'], ['gold', 'Pokémon Gold'], ['silver', 'Pokémon Silver']];
   options.forEach(([value, label]) => {
-    const opt = document.createElement('option');
-    opt.value = value;
-    opt.textContent = label;
-    select.appendChild(opt);
+    const li = document.createElement('li');
+    li.className = 'version-select-option';
+    li.dataset.value = value;
+    li.textContent = label;
+    li.setAttribute('role', 'option');
+    li.addEventListener('click', () => {
+      setSelectedVersion(value, label);
+      closeVersionSelect();
+    });
+    list.appendChild(li);
   });
+  closeVersionSelect();
+  setSelectedVersion(options[0][0], options[0][1]);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const exportBtn = document.getElementById('btn-export-save');
   if (!exportBtn) return;
 
+  const versionSelect = document.getElementById('export-version');
+  const trigger = versionSelect.querySelector('.version-select-trigger');
+
   populateExportVersions(currentMode);
 
-  const ivToggle = document.getElementById('toggle-random-ivs');
-  const evToggle = document.getElementById('toggle-random-evs');
-  if (ivToggle) ivToggle.addEventListener('change', e => { randomizeIVs = e.target.checked; });
-  if (evToggle) evToggle.addEventListener('change', e => { randomizeEVs = e.target.checked; });
+  trigger.addEventListener('click', () => {
+    const isOpen = versionSelect.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close when clicking away or pressing Escape
+  document.addEventListener('click', (e) => {
+    if (!versionSelect.contains(e.target)) closeVersionSelect();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeVersionSelect();
+  });
 
   exportBtn.addEventListener('click', async () => {
     if (!currentFixedTeam.length) {
@@ -452,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     exportBtn.disabled = true;
     try {
       await loadSaveData();
-      const version = document.getElementById('export-version').value;
+      const version = selectedVersion;
       const isGen2 = currentMode.startsWith('s2');
       const bytes = isGen2 ? buildGen2Save(currentFixedTeam, version) : buildGen1Save(currentFixedTeam);
       downloadSaveFile(bytes, `pokemon_${version}_stadium_team.sav`);

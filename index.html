@@ -80,8 +80,6 @@
         <input type="checkbox" id="toggle-3d">
         <span class="toggle-label">No 3D models</span>
       </label>
-    </div>
-    <div class="options-row">
       <label class="toggle-container">
         <input type="checkbox" id="toggle-random-ivs">
         <span class="toggle-label">Randomize IVs</span>
@@ -92,7 +90,13 @@
       </label>
     </div>
     <div class="options-row export-row">
-      <select id="export-version" aria-label="Game version to export for"></select>
+      <div class="version-select" id="export-version">
+        <button type="button" class="version-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="version-select-label"></span>
+          <span class="version-select-arrow" aria-hidden="true"></span>
+        </button>
+        <ul class="version-select-list" role="listbox" aria-label="Game version to export for"></ul>
+      </div>
       <button class="section-profile-btn" id="btn-export-save" title="Downloads a .sav file with your Fixed Team in the party. Rename it to match your ROM's filename and load it in an emulator (or flashcart) alongside that ROM, then connect via Transfer Pak in Stadium.">Export Save File</button>
     </div>
     <div class="teams">

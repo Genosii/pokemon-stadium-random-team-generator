@@ -843,24 +843,87 @@ footer a{
   align-items: center;
 }
 
-#export-version {
+/* Custom dropdown - a native select can't be styled consistently across browsers */
+.version-select {
+  position: relative;
+  min-width: 300px;
+}
+
+.version-select-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   background: #333;
   color: #fff;
   border: none;
-  padding: 10px 30px;
-  text-align: center;
+  padding: 10px 44px;
+  font-family: inherit;
   font-weight: bold;
   font-size: 1.1rem;
   border-radius: 30px;
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s;
 }
 
-#export-version:hover,
-#export-version:focus {
+.version-select-trigger:hover,
+.version-select-trigger:focus-visible {
   background: #444;
+}
+
+/* Pinned right so the label stays centred in the pill */
+.version-select-arrow {
+  position: absolute;
+  right: 22px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s;
+}
+
+.version-select.open .version-select-arrow {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+.version-select-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #333;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.version-select.open .version-select-list {
+  display: block;
+}
+
+.version-select-option {
+  padding: 10px 16px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.version-select-option:hover,
+.version-select-option.active {
+  background: #e4002b;
 }
 
 #btn-export-save {
