@@ -89,6 +89,14 @@
         <span class="toggle-label">Randomize EVs</span>
       </label>
     </div>
+    <div class="options-row">
+      <span class="segmented-label">Movesets</span>
+      <div class="segmented" id="moveset-mode" role="group" aria-label="Moveset style">
+        <button type="button" class="segmented-option" data-value="chaos" aria-pressed="false" title="Any move in the game, ignoring what the Pokémon can actually learn.">Chaos</button>
+        <button type="button" class="segmented-option active" data-value="legal" aria-pressed="true" title="Four random moves from the Pokémon's legal learnset.">Legal</button>
+        <button type="button" class="segmented-option" data-value="stadium" aria-pressed="false" title="A legal set built like the games do it: a STAB attack, coverage, a support move and a filler.">Stadium</button>
+      </div>
+    </div>
     <div class="options-row export-row">
       <div class="version-select" id="export-version">
         <button type="button" class="version-select-trigger" aria-haspopup="listbox" aria-expanded="false">

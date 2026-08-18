@@ -1,1018 +1,1780 @@
 {
   "absorb": {
+    "accuracy": 100,
     "id": 71,
-    "pp": 20
+    "power": 20,
+    "pp": 20,
+    "type": 22
   },
   "acid": {
+    "accuracy": 100,
     "id": 51,
-    "pp": 30
+    "power": 40,
+    "pp": 30,
+    "type": 3
   },
   "acidarmor": {
+    "accuracy": 100,
     "id": 151,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 3
   },
   "aeroblast": {
+    "accuracy": 95,
     "id": 177,
-    "pp": 5
+    "power": 100,
+    "pp": 5,
+    "type": 2
   },
   "agility": {
+    "accuracy": 100,
     "id": 97,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 24
   },
   "amnesia": {
+    "accuracy": 100,
     "id": 133,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 24
   },
   "ancientpower": {
+    "accuracy": 100,
     "id": 246,
-    "pp": 5
+    "power": 60,
+    "pp": 5,
+    "type": 5
   },
   "attract": {
+    "accuracy": 100,
     "id": 213,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 0
   },
   "aurorabeam": {
+    "accuracy": 100,
     "id": 62,
-    "pp": 20
+    "power": 65,
+    "pp": 20,
+    "type": 25
   },
   "barrage": {
+    "accuracy": 85,
     "id": 140,
-    "pp": 20
+    "power": 15,
+    "pp": 20,
+    "type": 0
   },
   "barrier": {
+    "accuracy": 100,
     "id": 112,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 24
   },
   "batonpass": {
+    "accuracy": 100,
     "id": 226,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 0
   },
   "beatup": {
+    "accuracy": 100,
     "id": 251,
-    "pp": 10
+    "power": 10,
+    "pp": 10,
+    "type": 27
   },
   "bellydrum": {
+    "accuracy": 100,
     "id": 187,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "bide": {
+    "accuracy": 100,
     "id": 117,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "bind": {
+    "accuracy": 75,
     "id": 20,
-    "pp": 20
+    "power": 15,
+    "pp": 20,
+    "type": 0
   },
   "bite": {
+    "accuracy": 100,
     "id": 44,
-    "pp": 25
+    "power": 60,
+    "pp": 25,
+    "type": 27
   },
   "blizzard": {
+    "accuracy": 70,
     "id": 59,
-    "pp": 5
+    "power": 120,
+    "pp": 5,
+    "type": 25
   },
   "bodyslam": {
+    "accuracy": 100,
     "id": 34,
-    "pp": 15
+    "power": 85,
+    "pp": 15,
+    "type": 0
   },
   "boneclub": {
+    "accuracy": 85,
     "id": 125,
-    "pp": 20
+    "power": 65,
+    "pp": 20,
+    "type": 4
   },
   "bonemerang": {
+    "accuracy": 90,
     "id": 155,
-    "pp": 10
+    "power": 50,
+    "pp": 10,
+    "type": 4
   },
   "bonerush": {
+    "accuracy": 80,
     "id": 198,
-    "pp": 10
+    "power": 25,
+    "pp": 10,
+    "type": 4
   },
   "bubble": {
+    "accuracy": 100,
     "id": 145,
-    "pp": 30
+    "power": 20,
+    "pp": 30,
+    "type": 21
   },
   "bubblebeam": {
+    "accuracy": 100,
     "id": 61,
-    "pp": 20
+    "power": 65,
+    "pp": 20,
+    "type": 21
   },
   "charm": {
+    "accuracy": 100,
     "id": 204,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "clamp": {
+    "accuracy": 75,
     "id": 128,
-    "pp": 10
+    "power": 35,
+    "pp": 10,
+    "type": 21
   },
   "cometpunch": {
+    "accuracy": 85,
     "id": 4,
-    "pp": 15
+    "power": 18,
+    "pp": 15,
+    "type": 0
   },
   "confuseray": {
+    "accuracy": 100,
     "id": 109,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 8
   },
   "confusion": {
+    "accuracy": 100,
     "id": 93,
-    "pp": 25
+    "power": 50,
+    "pp": 25,
+    "type": 24
   },
   "constrict": {
+    "accuracy": 100,
     "id": 132,
-    "pp": 35
+    "power": 10,
+    "pp": 35,
+    "type": 0
   },
   "conversion": {
+    "accuracy": 100,
     "id": 160,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "conversion2": {
+    "accuracy": 100,
     "id": 176,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "cottonspore": {
+    "accuracy": 85,
     "id": 178,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 22
   },
   "counter": {
+    "accuracy": 100,
     "id": 68,
-    "pp": 20
+    "power": 1,
+    "pp": 20,
+    "type": 1
   },
   "crabhammer": {
+    "accuracy": 85,
     "id": 152,
-    "pp": 10
+    "power": 90,
+    "pp": 10,
+    "type": 21
   },
   "crosschop": {
+    "accuracy": 80,
     "id": 238,
-    "pp": 5
+    "power": 100,
+    "pp": 5,
+    "type": 1
   },
   "crunch": {
+    "accuracy": 100,
     "id": 242,
-    "pp": 15
+    "power": 80,
+    "pp": 15,
+    "type": 27
   },
   "curse": {
+    "accuracy": 100,
     "id": 174,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 19
   },
   "cut": {
+    "accuracy": 95,
     "id": 15,
-    "pp": 30
+    "power": 50,
+    "pp": 30,
+    "type": 0
   },
   "defensecurl": {
+    "accuracy": 100,
     "id": 111,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 0
   },
   "destinybond": {
+    "accuracy": 100,
     "id": 194,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 8
   },
   "detect": {
+    "accuracy": 100,
     "id": 197,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 1
   },
   "dig": {
+    "accuracy": 100,
     "id": 91,
-    "pp": 10
+    "power": 60,
+    "pp": 10,
+    "type": 4
   },
   "disable": {
+    "accuracy": 55,
     "id": 50,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "dizzypunch": {
+    "accuracy": 100,
     "id": 146,
-    "pp": 10
+    "power": 70,
+    "pp": 10,
+    "type": 0
   },
   "doubleedge": {
+    "accuracy": 100,
     "id": 38,
-    "pp": 15
+    "power": 120,
+    "pp": 15,
+    "type": 0
   },
   "doublekick": {
+    "accuracy": 100,
     "id": 24,
-    "pp": 30
+    "power": 30,
+    "pp": 30,
+    "type": 1
   },
   "doubleslap": {
+    "accuracy": 85,
     "id": 3,
-    "pp": 10
+    "power": 15,
+    "pp": 10,
+    "type": 0
   },
   "doubleteam": {
+    "accuracy": 100,
     "id": 104,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 0
   },
   "dragonbreath": {
+    "accuracy": 100,
     "id": 225,
-    "pp": 20
+    "power": 60,
+    "pp": 20,
+    "type": 26
   },
   "dragonrage": {
+    "accuracy": 100,
     "id": 82,
-    "pp": 10
+    "power": 40,
+    "pp": 10,
+    "type": 26
   },
   "dreameater": {
+    "accuracy": 100,
     "id": 138,
-    "pp": 15
+    "power": 100,
+    "pp": 15,
+    "type": 24
   },
   "drillpeck": {
+    "accuracy": 100,
     "id": 65,
-    "pp": 20
+    "power": 80,
+    "pp": 20,
+    "type": 2
   },
   "dynamicpunch": {
+    "accuracy": 50,
     "id": 223,
-    "pp": 5
+    "power": 100,
+    "pp": 5,
+    "type": 1
   },
   "earthquake": {
+    "accuracy": 100,
     "id": 89,
-    "pp": 10
+    "power": 100,
+    "pp": 10,
+    "type": 4
   },
   "eggbomb": {
+    "accuracy": 75,
     "id": 121,
-    "pp": 10
+    "power": 100,
+    "pp": 10,
+    "type": 0
   },
   "ember": {
+    "accuracy": 100,
     "id": 52,
-    "pp": 25
+    "power": 40,
+    "pp": 25,
+    "type": 20
   },
   "encore": {
+    "accuracy": 100,
     "id": 227,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "endure": {
+    "accuracy": 100,
     "id": 203,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "explosion": {
+    "accuracy": 100,
     "id": 153,
-    "pp": 5
+    "power": 250,
+    "pp": 5,
+    "type": 0
   },
   "extremespeed": {
+    "accuracy": 100,
     "id": 245,
-    "pp": 5
+    "power": 80,
+    "pp": 5,
+    "type": 0
   },
   "faintattack": {
+    "accuracy": 100,
     "id": 185,
-    "pp": 20
+    "power": 60,
+    "pp": 20,
+    "type": 27
   },
   "falseswipe": {
+    "accuracy": 100,
     "id": 206,
-    "pp": 40
+    "power": 40,
+    "pp": 40,
+    "type": 0
   },
   "feintattack": {
+    "accuracy": 100,
     "id": 185,
-    "pp": 20
+    "power": 60,
+    "pp": 20,
+    "type": 27
   },
   "fireblast": {
+    "accuracy": 85,
     "id": 126,
-    "pp": 5
+    "power": 120,
+    "pp": 5,
+    "type": 20
   },
   "firepunch": {
+    "accuracy": 100,
     "id": 7,
-    "pp": 15
+    "power": 75,
+    "pp": 15,
+    "type": 20
   },
   "firespin": {
+    "accuracy": 70,
     "id": 83,
-    "pp": 15
+    "power": 15,
+    "pp": 15,
+    "type": 20
   },
   "fissure": {
+    "accuracy": 30,
     "id": 90,
-    "pp": 5
+    "power": 1,
+    "pp": 5,
+    "type": 4
   },
   "flail": {
+    "accuracy": 100,
     "id": 175,
-    "pp": 15
+    "power": 1,
+    "pp": 15,
+    "type": 0
   },
   "flamethrower": {
+    "accuracy": 100,
     "id": 53,
-    "pp": 15
+    "power": 95,
+    "pp": 15,
+    "type": 20
   },
   "flamewheel": {
+    "accuracy": 100,
     "id": 172,
-    "pp": 25
+    "power": 60,
+    "pp": 25,
+    "type": 20
   },
   "flash": {
+    "accuracy": 70,
     "id": 148,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "fly": {
+    "accuracy": 95,
     "id": 19,
-    "pp": 15
+    "power": 70,
+    "pp": 15,
+    "type": 2
   },
   "focusenergy": {
+    "accuracy": 100,
     "id": 116,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "foresight": {
+    "accuracy": 100,
     "id": 193,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 0
   },
   "frustration": {
+    "accuracy": 100,
     "id": 218,
-    "pp": 20
+    "power": 1,
+    "pp": 20,
+    "type": 0
   },
   "furyattack": {
+    "accuracy": 85,
     "id": 31,
-    "pp": 20
+    "power": 15,
+    "pp": 20,
+    "type": 0
   },
   "furycutter": {
+    "accuracy": 95,
     "id": 210,
-    "pp": 20
+    "power": 10,
+    "pp": 20,
+    "type": 7
   },
   "furyswipes": {
+    "accuracy": 80,
     "id": 154,
-    "pp": 15
+    "power": 18,
+    "pp": 15,
+    "type": 0
   },
   "futuresight": {
+    "accuracy": 90,
     "id": 248,
-    "pp": 15
+    "power": 80,
+    "pp": 15,
+    "type": 24
   },
   "gigadrain": {
+    "accuracy": 100,
     "id": 202,
-    "pp": 5
+    "power": 60,
+    "pp": 5,
+    "type": 22
   },
   "glare": {
+    "accuracy": 75,
     "id": 137,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "growl": {
+    "accuracy": 100,
     "id": 45,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 0
   },
   "growth": {
+    "accuracy": 100,
     "id": 74,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 0
   },
   "guillotine": {
+    "accuracy": 30,
     "id": 12,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "gust": {
+    "accuracy": 100,
     "id": 16,
-    "pp": 35
+    "power": 40,
+    "pp": 35,
+    "type": 2
   },
   "harden": {
+    "accuracy": 100,
     "id": 106,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "haze": {
+    "accuracy": 100,
     "id": 114,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 25
   },
   "headbutt": {
+    "accuracy": 100,
     "id": 29,
-    "pp": 15
+    "power": 70,
+    "pp": 15,
+    "type": 0
   },
   "healbell": {
+    "accuracy": 100,
     "id": 215,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "hiddenpower": {
+    "accuracy": 100,
     "id": 237,
-    "pp": 15
+    "power": 1,
+    "pp": 15,
+    "type": 0
   },
   "highjumpkick": {
+    "accuracy": 90,
     "id": 136,
-    "pp": 20
+    "power": 85,
+    "pp": 20,
+    "type": 1
   },
   "hijumpkick": {
+    "accuracy": 90,
     "id": 136,
-    "pp": 20
+    "power": 85,
+    "pp": 20,
+    "type": 1
   },
   "hornattack": {
+    "accuracy": 100,
     "id": 30,
-    "pp": 25
+    "power": 65,
+    "pp": 25,
+    "type": 0
   },
   "horndrill": {
+    "accuracy": 30,
     "id": 32,
-    "pp": 5
+    "power": 1,
+    "pp": 5,
+    "type": 0
   },
   "hydropump": {
+    "accuracy": 80,
     "id": 56,
-    "pp": 5
+    "power": 120,
+    "pp": 5,
+    "type": 21
   },
   "hyperbeam": {
+    "accuracy": 90,
     "id": 63,
-    "pp": 5
+    "power": 150,
+    "pp": 5,
+    "type": 0
   },
   "hyperfang": {
+    "accuracy": 90,
     "id": 158,
-    "pp": 15
+    "power": 80,
+    "pp": 15,
+    "type": 0
   },
   "hypnosis": {
+    "accuracy": 60,
     "id": 95,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 24
   },
   "icebeam": {
+    "accuracy": 100,
     "id": 58,
-    "pp": 10
+    "power": 95,
+    "pp": 10,
+    "type": 25
   },
   "icepunch": {
+    "accuracy": 100,
     "id": 8,
-    "pp": 15
+    "power": 75,
+    "pp": 15,
+    "type": 25
   },
   "icywind": {
+    "accuracy": 95,
     "id": 196,
-    "pp": 15
+    "power": 55,
+    "pp": 15,
+    "type": 25
   },
   "irontail": {
+    "accuracy": 75,
     "id": 231,
-    "pp": 15
+    "power": 100,
+    "pp": 15,
+    "type": 9
   },
   "jumpkick": {
+    "accuracy": 95,
     "id": 26,
-    "pp": 25
+    "power": 70,
+    "pp": 25,
+    "type": 1
   },
   "karatechop": {
+    "accuracy": 100,
     "id": 2,
-    "pp": 25
+    "power": 50,
+    "pp": 25,
+    "type": 1
   },
   "kinesis": {
+    "accuracy": 80,
     "id": 134,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 24
   },
   "leechlife": {
+    "accuracy": 100,
     "id": 141,
-    "pp": 15
+    "power": 20,
+    "pp": 15,
+    "type": 7
   },
   "leechseed": {
+    "accuracy": 90,
     "id": 73,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 22
   },
   "leer": {
+    "accuracy": 100,
     "id": 43,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "lick": {
+    "accuracy": 100,
     "id": 122,
-    "pp": 30
+    "power": 20,
+    "pp": 30,
+    "type": 8
   },
   "lightscreen": {
+    "accuracy": 100,
     "id": 113,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 24
   },
   "lockon": {
+    "accuracy": 100,
     "id": 199,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "lovelykiss": {
+    "accuracy": 75,
     "id": 142,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "lowkick": {
+    "accuracy": 90,
     "id": 67,
-    "pp": 20
+    "power": 50,
+    "pp": 20,
+    "type": 1
   },
   "machpunch": {
+    "accuracy": 100,
     "id": 183,
-    "pp": 30
+    "power": 40,
+    "pp": 30,
+    "type": 1
   },
   "magnitude": {
+    "accuracy": 100,
     "id": 222,
-    "pp": 30
+    "power": 1,
+    "pp": 30,
+    "type": 4
   },
   "meanlook": {
+    "accuracy": 100,
     "id": 212,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "meditate": {
+    "accuracy": 100,
     "id": 96,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 24
   },
   "megadrain": {
+    "accuracy": 100,
     "id": 72,
-    "pp": 10
+    "power": 40,
+    "pp": 10,
+    "type": 22
   },
   "megahorn": {
+    "accuracy": 85,
     "id": 224,
-    "pp": 10
+    "power": 120,
+    "pp": 10,
+    "type": 7
   },
   "megakick": {
+    "accuracy": 75,
     "id": 25,
-    "pp": 5
+    "power": 120,
+    "pp": 5,
+    "type": 0
   },
   "megapunch": {
+    "accuracy": 85,
     "id": 5,
-    "pp": 20
+    "power": 80,
+    "pp": 20,
+    "type": 0
   },
   "metalclaw": {
+    "accuracy": 95,
     "id": 232,
-    "pp": 35
+    "power": 50,
+    "pp": 35,
+    "type": 9
   },
   "metronome": {
+    "accuracy": 100,
     "id": 118,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "milkdrink": {
+    "accuracy": 100,
     "id": 208,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "mimic": {
+    "accuracy": 100,
     "id": 102,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "mindreader": {
+    "accuracy": 100,
     "id": 170,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "minimize": {
+    "accuracy": 100,
     "id": 107,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "mirrorcoat": {
+    "accuracy": 100,
     "id": 243,
-    "pp": 20
+    "power": 1,
+    "pp": 20,
+    "type": 24
   },
   "mirrormove": {
+    "accuracy": 100,
     "id": 119,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 2
   },
   "mist": {
+    "accuracy": 100,
     "id": 54,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 25
   },
   "moonlight": {
+    "accuracy": 100,
     "id": 236,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "morningsun": {
+    "accuracy": 100,
     "id": 234,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "mudslap": {
+    "accuracy": 100,
     "id": 189,
-    "pp": 10
+    "power": 20,
+    "pp": 10,
+    "type": 4
   },
   "nightmare": {
+    "accuracy": 100,
     "id": 171,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 8
   },
   "nightshade": {
+    "accuracy": 100,
     "id": 101,
-    "pp": 15
+    "power": 1,
+    "pp": 15,
+    "type": 8
   },
   "octazooka": {
+    "accuracy": 85,
     "id": 190,
-    "pp": 10
+    "power": 65,
+    "pp": 10,
+    "type": 21
   },
   "outrage": {
+    "accuracy": 100,
     "id": 200,
-    "pp": 15
+    "power": 90,
+    "pp": 15,
+    "type": 26
   },
   "painsplit": {
+    "accuracy": 100,
     "id": 220,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "payday": {
+    "accuracy": 100,
     "id": 6,
-    "pp": 20
+    "power": 40,
+    "pp": 20,
+    "type": 0
   },
   "peck": {
+    "accuracy": 100,
     "id": 64,
-    "pp": 35
+    "power": 35,
+    "pp": 35,
+    "type": 2
   },
   "perishsong": {
+    "accuracy": 100,
     "id": 195,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 0
   },
   "petaldance": {
+    "accuracy": 100,
     "id": 80,
-    "pp": 20
+    "power": 70,
+    "pp": 20,
+    "type": 22
   },
   "pinmissile": {
+    "accuracy": 85,
     "id": 42,
-    "pp": 20
+    "power": 14,
+    "pp": 20,
+    "type": 7
   },
   "poisongas": {
+    "accuracy": 55,
     "id": 139,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 3
   },
   "poisonpowder": {
+    "accuracy": 75,
     "id": 77,
-    "pp": 35
+    "power": 0,
+    "pp": 35,
+    "type": 3
   },
   "poisonsting": {
+    "accuracy": 100,
     "id": 40,
-    "pp": 35
+    "power": 15,
+    "pp": 35,
+    "type": 3
   },
   "pound": {
+    "accuracy": 100,
     "id": 1,
-    "pp": 35
+    "power": 40,
+    "pp": 35,
+    "type": 0
   },
   "powdersnow": {
+    "accuracy": 100,
     "id": 181,
-    "pp": 25
+    "power": 40,
+    "pp": 25,
+    "type": 25
   },
   "present": {
+    "accuracy": 90,
     "id": 217,
-    "pp": 15
+    "power": 1,
+    "pp": 15,
+    "type": 0
   },
   "protect": {
+    "accuracy": 100,
     "id": 182,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "psybeam": {
+    "accuracy": 100,
     "id": 60,
-    "pp": 20
+    "power": 65,
+    "pp": 20,
+    "type": 24
   },
   "psychic": {
+    "accuracy": 100,
     "id": 94,
-    "pp": 10
+    "power": 90,
+    "pp": 10,
+    "type": 24
   },
   "psychup": {
+    "accuracy": 100,
     "id": 244,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "psywave": {
+    "accuracy": 80,
     "id": 149,
-    "pp": 15
+    "power": 1,
+    "pp": 15,
+    "type": 24
   },
   "pursuit": {
+    "accuracy": 100,
     "id": 228,
-    "pp": 20
+    "power": 40,
+    "pp": 20,
+    "type": 27
   },
   "quickattack": {
+    "accuracy": 100,
     "id": 98,
-    "pp": 30
+    "power": 40,
+    "pp": 30,
+    "type": 0
   },
   "rage": {
+    "accuracy": 100,
     "id": 99,
-    "pp": 20
+    "power": 20,
+    "pp": 20,
+    "type": 0
   },
   "raindance": {
+    "accuracy": 90,
     "id": 240,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 21
   },
   "rapidspin": {
+    "accuracy": 100,
     "id": 229,
-    "pp": 40
+    "power": 20,
+    "pp": 40,
+    "type": 0
   },
   "razorleaf": {
+    "accuracy": 95,
     "id": 75,
-    "pp": 25
+    "power": 55,
+    "pp": 25,
+    "type": 22
   },
   "razorwind": {
+    "accuracy": 75,
     "id": 13,
-    "pp": 10
+    "power": 80,
+    "pp": 10,
+    "type": 0
   },
   "recover": {
+    "accuracy": 100,
     "id": 105,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "reflect": {
+    "accuracy": 100,
     "id": 115,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 24
   },
   "rest": {
+    "accuracy": 100,
     "id": 156,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 24
   },
   "return": {
+    "accuracy": 100,
     "id": 216,
-    "pp": 20
+    "power": 1,
+    "pp": 20,
+    "type": 0
   },
   "reversal": {
+    "accuracy": 100,
     "id": 179,
-    "pp": 15
+    "power": 1,
+    "pp": 15,
+    "type": 1
   },
   "roar": {
+    "accuracy": 100,
     "id": 46,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "rockslide": {
+    "accuracy": 90,
     "id": 157,
-    "pp": 10
+    "power": 75,
+    "pp": 10,
+    "type": 5
   },
   "rocksmash": {
+    "accuracy": 100,
     "id": 249,
-    "pp": 15
+    "power": 20,
+    "pp": 15,
+    "type": 1
   },
   "rockthrow": {
+    "accuracy": 90,
     "id": 88,
-    "pp": 15
+    "power": 50,
+    "pp": 15,
+    "type": 5
   },
   "rollingkick": {
+    "accuracy": 85,
     "id": 27,
-    "pp": 15
+    "power": 60,
+    "pp": 15,
+    "type": 1
   },
   "rollout": {
+    "accuracy": 90,
     "id": 205,
-    "pp": 20
+    "power": 30,
+    "pp": 20,
+    "type": 5
   },
   "sacredfire": {
+    "accuracy": 95,
     "id": 221,
-    "pp": 5
+    "power": 100,
+    "pp": 5,
+    "type": 20
   },
   "safeguard": {
+    "accuracy": 100,
     "id": 219,
-    "pp": 25
+    "power": 0,
+    "pp": 25,
+    "type": 0
   },
   "sandattack": {
+    "accuracy": 100,
     "id": 28,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 4
   },
   "sandstorm": {
+    "accuracy": 100,
     "id": 201,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 5
   },
   "scaryface": {
+    "accuracy": 90,
     "id": 184,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "scratch": {
+    "accuracy": 100,
     "id": 10,
-    "pp": 35
+    "power": 40,
+    "pp": 35,
+    "type": 0
   },
   "screech": {
+    "accuracy": 85,
     "id": 103,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 0
   },
   "seismictoss": {
+    "accuracy": 100,
     "id": 69,
-    "pp": 20
+    "power": 1,
+    "pp": 20,
+    "type": 1
   },
   "selfdestruct": {
+    "accuracy": 100,
     "id": 120,
-    "pp": 5
+    "power": 200,
+    "pp": 5,
+    "type": 0
   },
   "shadowball": {
+    "accuracy": 100,
     "id": 247,
-    "pp": 15
+    "power": 80,
+    "pp": 15,
+    "type": 8
   },
   "sharpen": {
+    "accuracy": 100,
     "id": 159,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "sing": {
+    "accuracy": 55,
     "id": 47,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 0
   },
   "sketch": {
+    "accuracy": 100,
     "id": 166,
-    "pp": 1
+    "power": 0,
+    "pp": 1,
+    "type": 0
   },
   "skullbash": {
+    "accuracy": 100,
     "id": 130,
-    "pp": 15
+    "power": 100,
+    "pp": 15,
+    "type": 0
   },
   "skyattack": {
+    "accuracy": 90,
     "id": 143,
-    "pp": 5
+    "power": 140,
+    "pp": 5,
+    "type": 2
   },
   "slam": {
+    "accuracy": 75,
     "id": 21,
-    "pp": 20
+    "power": 80,
+    "pp": 20,
+    "type": 0
   },
   "slash": {
+    "accuracy": 100,
     "id": 163,
-    "pp": 20
+    "power": 70,
+    "pp": 20,
+    "type": 0
   },
   "sleeppowder": {
+    "accuracy": 75,
     "id": 79,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 22
   },
   "sleeptalk": {
+    "accuracy": 100,
     "id": 214,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "sludge": {
+    "accuracy": 100,
     "id": 124,
-    "pp": 20
+    "power": 65,
+    "pp": 20,
+    "type": 3
   },
   "sludgebomb": {
+    "accuracy": 100,
     "id": 188,
-    "pp": 10
+    "power": 90,
+    "pp": 10,
+    "type": 3
   },
   "smog": {
+    "accuracy": 70,
     "id": 123,
-    "pp": 20
+    "power": 20,
+    "pp": 20,
+    "type": 3
   },
   "smokescreen": {
+    "accuracy": 100,
     "id": 108,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "snore": {
+    "accuracy": 100,
     "id": 173,
-    "pp": 15
+    "power": 40,
+    "pp": 15,
+    "type": 0
   },
   "softboiled": {
+    "accuracy": 100,
     "id": 135,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "solarbeam": {
+    "accuracy": 100,
     "id": 76,
-    "pp": 10
+    "power": 120,
+    "pp": 10,
+    "type": 22
   },
   "sonicboom": {
+    "accuracy": 90,
     "id": 49,
-    "pp": 20
+    "power": 20,
+    "pp": 20,
+    "type": 0
   },
   "spark": {
+    "accuracy": 100,
     "id": 209,
-    "pp": 20
+    "power": 65,
+    "pp": 20,
+    "type": 23
   },
   "spiderweb": {
+    "accuracy": 100,
     "id": 169,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 7
   },
   "spikecannon": {
+    "accuracy": 100,
     "id": 131,
-    "pp": 15
+    "power": 20,
+    "pp": 15,
+    "type": 0
   },
   "spikes": {
+    "accuracy": 100,
     "id": 191,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 4
   },
   "spite": {
+    "accuracy": 100,
     "id": 180,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 8
   },
   "splash": {
+    "accuracy": 100,
     "id": 150,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 0
   },
   "spore": {
+    "accuracy": 100,
     "id": 147,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 22
   },
   "steelwing": {
+    "accuracy": 90,
     "id": 211,
-    "pp": 25
+    "power": 70,
+    "pp": 25,
+    "type": 9
   },
   "stomp": {
+    "accuracy": 100,
     "id": 23,
-    "pp": 20
+    "power": 65,
+    "pp": 20,
+    "type": 0
   },
   "strength": {
+    "accuracy": 100,
     "id": 70,
-    "pp": 15
+    "power": 80,
+    "pp": 15,
+    "type": 0
   },
   "stringshot": {
+    "accuracy": 95,
     "id": 81,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 7
   },
   "struggle": {
+    "accuracy": 100,
     "id": 165,
-    "pp": 1
+    "power": 50,
+    "pp": 1,
+    "type": 0
   },
   "stunspore": {
+    "accuracy": 75,
     "id": 78,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 22
   },
   "submission": {
+    "accuracy": 80,
     "id": 66,
-    "pp": 25
+    "power": 80,
+    "pp": 25,
+    "type": 1
   },
   "substitute": {
+    "accuracy": 100,
     "id": 164,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "sunnyday": {
+    "accuracy": 90,
     "id": 241,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 20
   },
   "superfang": {
+    "accuracy": 90,
     "id": 162,
-    "pp": 10
+    "power": 1,
+    "pp": 10,
+    "type": 0
   },
   "supersonic": {
+    "accuracy": 55,
     "id": 48,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "surf": {
+    "accuracy": 100,
     "id": 57,
-    "pp": 15
+    "power": 95,
+    "pp": 15,
+    "type": 21
   },
   "swagger": {
+    "accuracy": 90,
     "id": 207,
-    "pp": 15
+    "power": 0,
+    "pp": 15,
+    "type": 0
   },
   "sweetkiss": {
+    "accuracy": 75,
     "id": 186,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "sweetscent": {
+    "accuracy": 100,
     "id": 230,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "swift": {
+    "accuracy": 100,
     "id": 129,
-    "pp": 20
+    "power": 60,
+    "pp": 20,
+    "type": 0
   },
   "swordsdance": {
+    "accuracy": 100,
     "id": 14,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "synthesis": {
+    "accuracy": 100,
     "id": 235,
-    "pp": 5
+    "power": 0,
+    "pp": 5,
+    "type": 22
   },
   "tackle": {
+    "accuracy": 95,
     "id": 33,
-    "pp": 35
+    "power": 35,
+    "pp": 35,
+    "type": 0
   },
   "tailwhip": {
+    "accuracy": 100,
     "id": 39,
-    "pp": 30
+    "power": 0,
+    "pp": 30,
+    "type": 0
   },
   "takedown": {
+    "accuracy": 85,
     "id": 36,
-    "pp": 20
+    "power": 90,
+    "pp": 20,
+    "type": 0
   },
   "teleport": {
+    "accuracy": 100,
     "id": 100,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 24
   },
   "thief": {
+    "accuracy": 100,
     "id": 168,
-    "pp": 10
+    "power": 40,
+    "pp": 10,
+    "type": 27
   },
   "thrash": {
+    "accuracy": 100,
     "id": 37,
-    "pp": 20
+    "power": 90,
+    "pp": 20,
+    "type": 0
   },
   "thunder": {
+    "accuracy": 70,
     "id": 87,
-    "pp": 10
+    "power": 120,
+    "pp": 10,
+    "type": 23
   },
   "thunderbolt": {
+    "accuracy": 100,
     "id": 85,
-    "pp": 15
+    "power": 95,
+    "pp": 15,
+    "type": 23
   },
   "thunderpunch": {
+    "accuracy": 100,
     "id": 9,
-    "pp": 15
+    "power": 75,
+    "pp": 15,
+    "type": 23
   },
   "thundershock": {
+    "accuracy": 100,
     "id": 84,
-    "pp": 30
+    "power": 40,
+    "pp": 30,
+    "type": 23
   },
   "thunderwave": {
+    "accuracy": 100,
     "id": 86,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 23
   },
   "toxic": {
+    "accuracy": 85,
     "id": 92,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 3
   },
   "transform": {
+    "accuracy": 100,
     "id": 144,
-    "pp": 10
+    "power": 0,
+    "pp": 10,
+    "type": 0
   },
   "triattack": {
+    "accuracy": 100,
     "id": 161,
-    "pp": 10
+    "power": 80,
+    "pp": 10,
+    "type": 0
   },
   "triplekick": {
+    "accuracy": 90,
     "id": 167,
-    "pp": 10
+    "power": 10,
+    "pp": 10,
+    "type": 1
   },
   "twineedle": {
+    "accuracy": 100,
     "id": 41,
-    "pp": 20
+    "power": 25,
+    "pp": 20,
+    "type": 7
   },
   "twister": {
+    "accuracy": 100,
     "id": 239,
-    "pp": 20
+    "power": 40,
+    "pp": 20,
+    "type": 26
   },
   "vicegrip": {
+    "accuracy": 100,
     "id": 11,
-    "pp": 30
+    "power": 55,
+    "pp": 30,
+    "type": 0
   },
   "vinewhip": {
+    "accuracy": 100,
     "id": 22,
-    "pp": 10
+    "power": 35,
+    "pp": 10,
+    "type": 22
   },
   "visegrip": {
+    "accuracy": 100,
     "id": 11,
-    "pp": 30
+    "power": 55,
+    "pp": 30,
+    "type": 0
   },
   "vitalthrow": {
+    "accuracy": 100,
     "id": 233,
-    "pp": 10
+    "power": 70,
+    "pp": 10,
+    "type": 1
   },
   "waterfall": {
+    "accuracy": 100,
     "id": 127,
-    "pp": 15
+    "power": 80,
+    "pp": 15,
+    "type": 21
   },
   "watergun": {
+    "accuracy": 100,
     "id": 55,
-    "pp": 25
+    "power": 40,
+    "pp": 25,
+    "type": 21
   },
   "whirlpool": {
+    "accuracy": 70,
     "id": 250,
-    "pp": 15
+    "power": 15,
+    "pp": 15,
+    "type": 21
   },
   "whirlwind": {
+    "accuracy": 100,
     "id": 18,
-    "pp": 20
+    "power": 0,
+    "pp": 20,
+    "type": 0
   },
   "wingattack": {
+    "accuracy": 100,
     "id": 17,
-    "pp": 35
+    "power": 60,
+    "pp": 35,
+    "type": 2
   },
   "withdraw": {
+    "accuracy": 100,
     "id": 110,
-    "pp": 40
+    "power": 0,
+    "pp": 40,
+    "type": 21
   },
   "wrap": {
+    "accuracy": 85,
     "id": 35,
-    "pp": 20
+    "power": 15,
+    "pp": 20,
+    "type": 0
   },
   "zapcannon": {
+    "accuracy": 50,
     "id": 192,
-    "pp": 5
+    "power": 100,
+    "pp": 5,
+    "type": 23
   }
 }

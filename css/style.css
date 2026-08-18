@@ -856,6 +856,49 @@ footer a{
   align-items: center;
 }
 
+/* Moveset style picker */
+.segmented-label {
+  align-self: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.segmented {
+  display: flex;
+  background: #333;
+  border-radius: 30px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.segmented-option {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.segmented-option:hover {
+  color: #fff;
+  background: #444;
+}
+
+.segmented-option.active {
+  background: #e4002b;
+  color: #fff;
+}
+
 /* Custom dropdown - a native select can't be styled consistently across browsers */
 .version-select {
   position: relative;

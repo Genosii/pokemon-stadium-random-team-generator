@@ -37,6 +37,10 @@ let noTradebackMoves = false;
 let no3dModels = false;
 let randomizeIVs = false;
 let randomizeEVs = false;
+// 'chaos' ignores learnsets, 'legal' picks at random from them, 'stadium' builds a
+// structured set (STAB + coverage + support + filler) the way the games' own
+// Challenge Cup generator does.
+let movesetMode = 'legal';
 
 // Gen 2 move exclusion list for Stadium 1
 const GEN2_MOVE_EXCLUSIONS = [
@@ -47,8 +51,120 @@ const GEN2_MOVE_EXCLUSIONS = [
 let pokemonData = {};
 let moveData = {};
 let speciesData = {};
+let moveIdData = {};
 let currentMode = 's1gym';
 let currentFixedTeam = [];
+
+// Gen 1 only knows moves 1-165; Gen 2 appended 166-251 without renumbering
+const GEN1_MAX_MOVE_ID = 165;
+
+const TYPE_NAMES = {
+  0: 'normal', 1: 'fighting', 2: 'flying', 3: 'poison', 4: 'ground', 5: 'rock',
+  6: 'flying', 7: 'bug', 8: 'ghost', 9: 'steel', 19: 'normal', 20: 'fire',
+  21: 'water', 22: 'grass', 23: 'electric', 24: 'psychic', 25: 'ice',
+  26: 'dragon', 27: 'dark'
+};
+
+// Status moves worth building a set around, so "stadium" sets get a useful
+// support slot instead of a random one like Splash or Sharpen.
+const GOOD_SUPPORT_MOVES = [
+  "rest", "recover", "softboiled", "milkdrink", "moonlight", "morningsun", "synthesis",
+  "thunderwave", "toxic", "sleeppowder", "spore", "hypnosis", "lovelykiss", "sing",
+  "confuseray", "swordsdance", "amnesia", "curse", "growth", "agility", "doubleteam",
+  "substitute", "reflect", "lightscreen", "leechseed", "batonpass", "bellydrum",
+  "perishsong", "haze", "spikes", "encore", "screech", "charm", "cottonspore",
+  "meanlook", "safeguard", "healbell", "protect", "acidarmor", "barrier", "minimize",
+  "sharpen", "meditate", "focusenergy", "psychup", "painsplit", "destinybond"
+];
+
+function moveKey(move) {
+  return String(move).toLowerCase().replace(/\s+/g, "");
+}
+
+function moveInfo(move) {
+  return moveIdData[moveKey(move)];
+}
+
+// Every move that exists in the target generation, learnsets ignored entirely.
+function getChaosMovePool() {
+  const isGen1 = currentMode.startsWith('s1');
+  const seen = new Set();
+  const pool = [];
+  Object.keys(moveIdData).forEach(key => {
+    const info = moveIdData[key];
+    // move_ids.json carries a few spelling aliases, so dedupe by id
+    if (!info || !info.id || seen.has(info.id)) return;
+    if (isGen1 && info.id > GEN1_MAX_MOVE_ID) return;
+    seen.add(info.id);
+    pool.push(key);
+  });
+  return pool;
+}
+
+// Builds a set with a role per slot, mirroring how Stadium 2's Challenge Cup
+// generator fills its movesets. Deliberately not competitively optimal - it just
+// avoids the four-random-status-moves problem.
+function pickStadiumStyleMoves(name, legal) {
+  const sp = speciesData[name] || {};
+  const stabTypes = [sp.type1, sp.type2];
+  const typeOf = m => { const i = moveInfo(m); return i ? i.type : 0; };
+  const known = legal.filter(m => moveInfo(m));
+  const attacks = known.filter(m => moveInfo(m).power > 0);
+  const supports = known.filter(m => moveInfo(m).power === 0);
+  const isGood = m => { const i = moveInfo(m); return i.power >= 70 && i.accuracy >= 85; };
+
+  const picked = [];
+  const take = (arr) => {
+    const pool = arr.filter(m => !picked.includes(m));
+    if (!pool.length) return false;
+    const strong = pool.filter(isGood);
+    const from = (strong.length && Math.random() < 0.75) ? strong : pool;
+    picked.push(from[Math.floor(Math.random() * from.length)]);
+    return true;
+  };
+
+  // 1. A STAB attack to build around
+  take(attacks.filter(m => stabTypes.includes(typeOf(m)))) || take(attacks);
+
+  // 2. Coverage - an attack of a different type to the first
+  const firstType = picked.length ? typeOf(picked[0]) : null;
+  take(attacks.filter(m => typeOf(m) !== firstType)) || take(attacks);
+
+  // 3. Something useful that isn't an attack
+  take(supports.filter(m => GOOD_SUPPORT_MOVES.includes(moveKey(m)))) || take(supports);
+
+  // 4. Filler, leaning on whichever attacking stat the species actually has
+  const prefersPhysical = (sp.attack || 0) >= (sp.spAttack || 0);
+  const filler = attacks.filter(m => prefersPhysical ? typeOf(m) < 10 : typeOf(m) >= 20);
+  if (!(Math.random() < 0.5 && take(filler))) {
+    take(supports) || take(filler) || take(attacks);
+  }
+
+  // Top up from anything legal that's left (tiny learnsets like Caterpie's)
+  const leftovers = legal.filter(m => !picked.includes(m));
+  while (picked.length < 4 && leftovers.length) {
+    picked.push(leftovers.splice(Math.floor(Math.random() * leftovers.length), 1)[0]);
+  }
+  while (picked.length < 4) picked.push("Struggle");
+  return picked.slice(0, 4);
+}
+
+function pickMovesFor(name) {
+  if (movesetMode === 'chaos') {
+    const moves = randomSample(getChaosMovePool(), 4);
+    while (moves.length < 4) moves.push("Struggle");
+    return moves;
+  }
+
+  const legal = getMoveInheritance(name, currentMode);
+  if (!legal || !legal.length) return ["Struggle", "Struggle", "Struggle", "Struggle"];
+
+  if (movesetMode === 'stadium') return pickStadiumStyleMoves(name, legal);
+
+  const moves = randomSample(legal, 4);
+  while (moves.length < 4) moves.push("Struggle");
+  return moves;
+}
 
 // Gen 2 derives gender, shininess and Hidden Power's type from a Pokémon's DVs, so
 // they're rolled once when the team is generated and shared by the cards and the
@@ -166,7 +282,10 @@ function getMoveType(move, poke) {
     return poke?.dvs ? getHiddenPowerType(poke.dvs).toLowerCase() : "normal";
   }
 
-  return moveData?.moveTypes?.[normalized]?.type?.toLowerCase() || "normal";
+  const named = moveData?.moveTypes?.[normalized]?.type?.toLowerCase();
+  if (named) return named;
+  const info = moveIdData[normalized];
+  return info ? (TYPE_NAMES[info.type] || "normal") : "normal";
 }
 
 function getRandomLevel() {
@@ -630,10 +749,9 @@ function randomizeFullTeam() {
         console.error(`No valid moves for ${name}`);
         return null;
       }
-      
-      const moves = randomSample(movePool, 4);
-      while (moves.length < 4) moves.push("Struggle");
-      
+
+      const moves = pickMovesFor(name);
+
       // Add shiny property for Stadium 2
       const isShinyPokemon = currentMode.startsWith('s2') && isShiny();
       const gender = getRandomGender(name);
@@ -780,8 +898,9 @@ document.addEventListener('DOMContentLoaded', () => {
   Promise.all([
     fetch('json/pokemon_data.json').then(res => res.json()).catch(() => ({})),
     fetch('json/pokemon_moves.json').then(res => res.json()).catch(() => ({})),
-    fetch('json/pokemon_species.json').then(res => res.json()).catch(() => ({}))
-  ]).then(([pokeData, moveJson, speciesJson]) => {
+    fetch('json/pokemon_species.json').then(res => res.json()).catch(() => ({})),
+    fetch('json/move_ids.json').then(res => res.json()).catch(() => ({}))
+  ]).then(([pokeData, moveJson, speciesJson, moveIdJson]) => {
     if (!pokeData || !moveJson) {
       console.error('Failed to load required data');
       return;
@@ -789,6 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pokemonData = pokeData;
     moveData = moveJson;
     speciesData = speciesJson;
+    moveIdData = moveIdJson;
 
     // Add toggle handlers
     const tradebackToggle = document.getElementById('toggle-tradeback');
@@ -836,6 +956,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Stat EXP only affects the exported save, so no re-render needed
     document.getElementById('toggle-random-evs').addEventListener('change', (e) => {
       randomizeEVs = e.target.checked;
+    });
+
+    // Moveset style: re-roll moves on the existing team so the choice can be
+    // compared without losing the Pokémon you just rolled
+    document.querySelectorAll('#moveset-mode .segmented-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.value === movesetMode) return;
+        movesetMode = btn.dataset.value;
+        document.querySelectorAll('#moveset-mode .segmented-option').forEach(other => {
+          const active = other === btn;
+          other.classList.toggle('active', active);
+          other.setAttribute('aria-pressed', active);
+        });
+        if (currentFixedTeam.length > 0) {
+          currentFixedTeam.forEach(poke => { poke.moves = pickMovesFor(poke.name); });
+          renderTeam(currentFixedTeam, 'fixed-team');
+        }
+      });
     });
   });
 

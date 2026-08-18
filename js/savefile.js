@@ -10,21 +10,16 @@ const GEN1_CHAR_A = 0x80;
 const TEXT_TERMINATOR = 0x50;
 const TEXT_SPACE = 0x7F;
 
-let saveMoveData = {};
 let saveItemData = {};
 let saveDataPromise = null;
 
-// Species base stats/DV data is already loaded by randomize.js into speciesData,
-// so only the numeric move and item IDs are fetched here, on first export.
+// Species and move data are already loaded by randomize.js (speciesData/moveIdData),
+// so only the item IDs are fetched here, on first export.
 function loadSaveData() {
   if (!saveDataPromise) {
-    saveDataPromise = Promise.all([
-      fetch('json/move_ids.json').then(res => res.json()),
-      fetch('json/item_ids.json').then(res => res.json())
-    ]).then(([moves, items]) => {
-      saveMoveData = moves;
-      saveItemData = items;
-    });
+    saveDataPromise = fetch('json/item_ids.json')
+      .then(res => res.json())
+      .then(items => { saveItemData = items; });
   }
   return saveDataPromise;
 }
@@ -123,7 +118,7 @@ function dvsFor(mon) {
 }
 
 function moveInfoFor(moveName) {
-  return saveMoveData[normalizeMoveKey(moveName)] || saveMoveData['struggle'];
+  return moveIdData[normalizeMoveKey(moveName)] || moveIdData['struggle'];
 }
 
 // --- Gen 1 (Red/Blue/Yellow) ---
