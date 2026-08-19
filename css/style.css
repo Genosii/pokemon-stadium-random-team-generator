@@ -856,24 +856,32 @@ footer a{
   align-items: center;
 }
 
-#seed-input {
-  background: #333;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  padding: 9px 18px;
-  width: 130px;
-  font-family: inherit;
-  font-weight: bold;
-  font-size: 0.95rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-align: center;
+/* All toggles share one row, so keep them compact enough that Stadium 1's
+   seven still fit on a single line at laptop widths */
+.toggles-row {
+  gap: 10px 14px;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#seed-input::placeholder {
-  color: #777;
-  letter-spacing: 1px;
+.toggles-row .toggle-label {
+  font-size: 0.9rem;
+}
+
+.toggles-row input[type="checkbox"] {
+  width: 34px;
+  height: 18px;
+  margin-right: 6px;
+}
+
+.toggles-row input[type="checkbox"]::before {
+  width: 14px;
+  height: 14px;
+}
+
+.toggles-row input[type="checkbox"]:checked::before {
+  transform: translateX(16px);
 }
 
 .seed-btn {

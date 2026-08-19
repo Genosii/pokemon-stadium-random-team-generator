@@ -71,10 +71,10 @@
       <h1>Pokémon Stadium Team Generator</h1>
       <h2 id="subtitle">Gym Leader Castle</h2>
     </div>
-    <div class="options-row">
+    <div class="options-row toggles-row">
       <label class="toggle-container">
         <input type="checkbox" id="toggle-tradeback">
-        <span class="toggle-label">No tradeback moves</span>
+        <span class="toggle-label">No tradebacks</span>
       </label>
       <label class="toggle-container">
         <input type="checkbox" id="toggle-3d">
@@ -82,40 +82,33 @@
       </label>
       <label class="toggle-container">
         <input type="checkbox" id="toggle-random-ivs">
-        <span class="toggle-label">Randomize IVs</span>
+        <span class="toggle-label">Random IVs</span>
       </label>
       <label class="toggle-container">
         <input type="checkbox" id="toggle-random-evs">
-        <span class="toggle-label">Randomize EVs</span>
+        <span class="toggle-label">Random EVs</span>
       </label>
-    </div>
-    <div class="options-row">
       <label class="toggle-container">
         <input type="checkbox" id="toggle-no-legendaries">
         <span class="toggle-label">No legendaries</span>
       </label>
       <label class="toggle-container">
         <input type="checkbox" id="toggle-final-evos">
-        <span class="toggle-label">Final evolutions only</span>
+        <span class="toggle-label">Final evos only</span>
       </label>
       <label class="toggle-container">
         <input type="checkbox" id="toggle-mono-type">
         <span class="toggle-label">Mono-type team</span>
       </label>
     </div>
-    <div class="options-row">
+    <div class="options-row export-row">
       <span class="segmented-label">Movesets</span>
       <div class="segmented" id="moveset-mode" role="group" aria-label="Moveset style">
         <button type="button" class="segmented-option" data-value="chaos" aria-pressed="false" title="Any move in the game, ignoring what the Pokémon can actually learn.">Chaos</button>
         <button type="button" class="segmented-option active" data-value="legal" aria-pressed="true" title="Four random moves from the Pokémon's legal learnset.">Legal</button>
         <button type="button" class="segmented-option" data-value="stadium" aria-pressed="false" title="A legal set built like the games do it: a STAB attack, coverage, a support move and a filler.">Stadium</button>
       </div>
-    </div>
-    <div class="options-row">
-      <span class="segmented-label">Seed</span>
-      <input type="text" id="seed-input" maxlength="8" spellcheck="false" placeholder="random"
-             title="The seed used for the current team. Paste a seed here to rebuild that exact team, or clear it for a fresh random one.">
-      <button type="button" class="seed-btn" id="btn-new-seed" title="Clear the seed so the next team is random.">New</button>
+      <button type="button" class="seed-btn" id="btn-copy-seed" title="Copies a link that rebuilds this exact team.">Copy Seed</button>
     </div>
     <div class="options-row export-row">
       <div class="version-select" id="export-version">

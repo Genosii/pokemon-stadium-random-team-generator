@@ -100,6 +100,18 @@ function seedToText(seed) {
   return ('0000000' + seed.toString(16).toUpperCase()).slice(-8);
 }
 
+// currentSeed is whatever built the team on screen; pendingSeed is a seed from a
+// shared link, waiting to be used for the next (and only the next) team.
+let currentSeed = null;
+let pendingSeed = null;
+
+function seedShareUrl() {
+  const url = new URL(window.location.href);
+  url.searchParams.set('seed', seedToText(currentSeed));
+  url.searchParams.set('mode', currentMode);
+  return url.toString();
+}
+
 // Species that can never legitimately exist below a given level, taking both
 // evolution requirements and wild encounters into account.
 function getMinLegalLevel(name) {
@@ -486,8 +498,8 @@ function renderTeam(team, containerId, showMoves = true) {
           let label = moveObj && moveObj.display ? moveObj.display : move;
           let title = '';
           if (moveKey === "hiddenpower" && poke.dvs) {
+            // Type is shown by the box colour - spelling it out overflows the card
             const hpType = getHiddenPowerType(poke.dvs);
-            label = `${label} (${hpType})`;
             title = ` title="${hpType} type, ${getHiddenPowerPower(poke.dvs)} base power (from DVs)"`;
           }
           return `<div class="move-box type-${getMoveType(move, poke)}"${title}>${label}</div>`;
@@ -808,12 +820,12 @@ function isShiny() {
 }
 
 function randomizeFullTeam() {
-  // A seed left in the box reproduces that exact team; otherwise roll a fresh one
-  const seedInput = document.getElementById('seed-input');
-  const typed = seedInput ? seedInput.value.trim() : '';
-  const seed = typed ? (parseInt(typed, 16) >>> 0) : randomSeed();
+  // Randomizing always gives a new team; pendingSeed is only set when a shared
+  // link is opened, so that one team can be reproduced exactly.
+  const seed = pendingSeed !== null ? pendingSeed : randomSeed();
+  pendingSeed = null;
+  currentSeed = seed;
   setSeed(seed);
-  if (seedInput) seedInput.value = seedToText(seed);
 
   let pool = applyPoolFilters(filterPokemonForMode(currentMode));
   if (monoTypeTeam) {
@@ -1078,17 +1090,39 @@ document.addEventListener('DOMContentLoaded', () => {
     ].forEach(([id, apply]) => {
       document.getElementById(id).addEventListener('change', (e) => {
         apply(e.target.checked);
-        if (currentFixedTeam.length > 0) {
-          const seedInput = document.getElementById('seed-input');
-          if (seedInput) seedInput.value = ''; // filters change the pool, so reseed
-          randomizeFullTeam();
-        }
+        if (currentFixedTeam.length > 0) randomizeFullTeam();
       });
     });
 
-    document.getElementById('btn-new-seed').addEventListener('click', () => {
-      document.getElementById('seed-input').value = '';
+    const copyBtn = document.getElementById('btn-copy-seed');
+    copyBtn.addEventListener('click', () => {
+      if (currentSeed === null) return;
+      const done = () => {
+        const original = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => { copyBtn.textContent = original; }, 1200);
+      };
+      const link = seedShareUrl();
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(link).then(done).catch(() => window.prompt('Copy this link:', link));
+      } else {
+        window.prompt('Copy this link:', link);
+      }
     });
+
+    // Opening a shared link jumps straight to that cup and rebuilds its team
+    const params = new URLSearchParams(window.location.search);
+    const sharedSeed = params.get('seed');
+    if (sharedSeed && /^[0-9a-fA-F]{1,8}$/.test(sharedSeed)) {
+      pendingSeed = parseInt(sharedSeed, 16) >>> 0;
+      const sharedMode = params.get('mode');
+      if (sharedMode && MODES.hasOwnProperty(sharedMode)) {
+        setMode(sharedMode);
+        setTimeout(randomizeFullTeam, 500); // wait out the page transition
+      } else {
+        randomizeFullTeam();
+      }
+    }
 
     // Moveset style: re-roll moves on the existing team so the choice can be
     // compared without losing the Pokémon you just rolled
