@@ -108,7 +108,24 @@
         <button type="button" class="segmented-option active" data-value="legal" aria-pressed="true" title="Four random moves from the Pokémon's legal learnset.">Legal</button>
         <button type="button" class="segmented-option" data-value="stadium" aria-pressed="false" title="A legal set built like the games do it: a STAB attack, coverage, a support move and a filler.">Stadium</button>
       </div>
-      <button type="button" class="seed-btn" id="btn-copy-seed" title="Copies a link that rebuilds this exact team.">Copy Seed</button>
+      <span class="segmented-label">Seed</span>
+      <div class="seed-field" id="seed-field">
+        <input type="text" id="seed-input" maxlength="8" spellcheck="false" autocomplete="off"
+               placeholder="--------" aria-label="Team seed"
+               title="The seed that built this team. Paste one in and press the arrow to rebuild that team.">
+        <button type="button" class="seed-icon-btn" id="btn-copy-seed" title="Copy this seed" aria-label="Copy seed">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+            <path d="M5 15V5a2 2 0 0 1 2-2h10"></path>
+          </svg>
+        </button>
+        <button type="button" class="seed-icon-btn" id="btn-apply-seed" title="Rebuild the team from this seed" aria-label="Load seed">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 10 4 15 9 20"></polyline>
+            <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+          </svg>
+        </button>
+      </div>
     </div>
     <div class="options-row export-row">
       <div class="version-select" id="export-version">

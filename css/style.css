@@ -884,24 +884,62 @@ footer a{
   transform: translateX(16px);
 }
 
-.seed-btn {
+/* Seed field: the seed stays readable, with copy and load beside it */
+.seed-field {
+  display: flex;
+  align-items: center;
   background: #333;
-  color: #ccc;
-  border: none;
   border-radius: 30px;
-  padding: 9px 18px;
+  padding: 3px 4px 3px 14px;
+  gap: 2px;
+  transition: box-shadow 0.2s;
+}
+
+#seed-input {
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  width: 92px;
+  padding: 6px 0;
   font-family: inherit;
   font-weight: bold;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  text-align: center;
+}
+
+#seed-input::placeholder {
+  color: #666;
+  letter-spacing: 2px;
+}
+
+.seed-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #bbb;
+  padding: 7px;
+  border-radius: 50%;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
 
-.seed-btn:hover {
-  background: #444;
+.seed-icon-btn:hover,
+.seed-icon-btn:focus-visible {
+  background: #4d4d4d;
   color: #fff;
+}
+
+.seed-field.invalid {
+  box-shadow: 0 0 0 2px #e4002b;
+}
+
+.seed-field.copied {
+  box-shadow: 0 0 0 2px #3c9;
 }
 
 /* Moveset style picker */

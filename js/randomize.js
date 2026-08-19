@@ -826,6 +826,8 @@ function randomizeFullTeam() {
   pendingSeed = null;
   currentSeed = seed;
   setSeed(seed);
+  const seedInput = document.getElementById('seed-input');
+  if (seedInput) seedInput.value = seedToText(seed);
 
   let pool = applyPoolFilters(filterPokemonForMode(currentMode));
   if (monoTypeTeam) {
@@ -1094,20 +1096,35 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    const copyBtn = document.getElementById('btn-copy-seed');
-    copyBtn.addEventListener('click', () => {
-      if (currentSeed === null) return;
-      const done = () => {
-        const original = copyBtn.textContent;
-        copyBtn.textContent = 'Copied!';
-        setTimeout(() => { copyBtn.textContent = original; }, 1200);
-      };
-      const link = seedShareUrl();
+    const seedField = document.getElementById('seed-field');
+    const seedInput = document.getElementById('seed-input');
+
+    const flashSeed = (state) => {
+      seedField.classList.add(state);
+      setTimeout(() => seedField.classList.remove(state), 900);
+    };
+
+    document.getElementById('btn-copy-seed').addEventListener('click', () => {
+      const text = seedInput.value.trim();
+      if (!text) return;
       if (navigator.clipboard?.writeText) {
-        navigator.clipboard.writeText(link).then(done).catch(() => window.prompt('Copy this link:', link));
+        navigator.clipboard.writeText(text).then(() => flashSeed('copied'))
+          .catch(() => window.prompt('Copy this seed:', text));
       } else {
-        window.prompt('Copy this link:', link);
+        window.prompt('Copy this seed:', text);
       }
+    });
+
+    // Loading a seed is explicit, so plain randomizing always gives a new team
+    const applySeed = () => {
+      const text = seedInput.value.trim();
+      if (!/^[0-9a-fA-F]{1,8}$/.test(text)) return flashSeed('invalid');
+      pendingSeed = parseInt(text, 16) >>> 0;
+      randomizeFullTeam();
+    };
+    document.getElementById('btn-apply-seed').addEventListener('click', applySeed);
+    seedInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); applySeed(); }
     });
 
     // Opening a shared link jumps straight to that cup and rebuilds its team
