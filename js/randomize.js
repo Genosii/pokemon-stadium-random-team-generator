@@ -77,6 +77,95 @@ const GOOD_SUPPORT_MOVES = [
   "sharpen", "meditate", "focusenergy", "psychup", "painsplit", "destinybond"
 ];
 
+// Seeded RNG so a team can be reproduced and shared. Uses the same LCG constants
+// the Game Boy/N64 games do. rngState of null means "unseeded" - fall back to
+// Math.random so behaviour is unchanged when no seed is in play.
+let rngState = null;
+
+function rng() {
+  if (rngState === null) return Math.random();
+  rngState = (Math.imul(0x19660D, rngState) + 0x3C6EF35F) >>> 0;
+  return rngState / 0x100000000;
+}
+
+function setSeed(seed) {
+  rngState = seed >>> 0;
+}
+
+function randomSeed() {
+  return Math.floor(Math.random() * 0x100000000) >>> 0;
+}
+
+function seedToText(seed) {
+  return ('0000000' + seed.toString(16).toUpperCase()).slice(-8);
+}
+
+// Species that can never legitimately exist below a given level, taking both
+// evolution requirements and wild encounters into account.
+function getMinLegalLevel(name) {
+  const sp = speciesData[name];
+  if (!sp) return 1;
+  const evo = sp.minLevel || 1;
+  const wild = sp.minWildLevel;
+  return wild ? Math.min(evo, wild) : evo;
+}
+
+const LEGENDARIES = [
+  'articuno', 'zapdos', 'moltres', 'mewtwo', 'mew',
+  'raikou', 'entei', 'suicune', 'lugia', 'hooh', 'celebi'
+];
+
+// Highest level a cup allows, used to drop species that could never be raised
+// (or caught) that low - e.g. Machamp in Pika Cup's 15-20 band.
+const CUP_MAX_LEVEL = {
+  s1Petit: 30, s2Petit: 30, s1Pika: 20,
+  s1Poke: 55, s2Poke: 55
+};
+
+let noLegendaries = false;
+let finalEvosOnly = false;
+let monoTypeTeam = false;
+
+// Drops species that can't legally exist at the cup's levels (Machamp needs 28,
+// Pika Cup tops out at 20) plus whatever the user has filtered out. Falls back to
+// the unfiltered pool rather than leaving too few Pokémon to build a team.
+function applyPoolFilters(pool) {
+  let filtered = pool;
+  const maxLevel = CUP_MAX_LEVEL[currentMode];
+  if (maxLevel) filtered = filtered.filter(n => getMinLegalLevel(n) <= maxLevel);
+  if (noLegendaries) filtered = filtered.filter(n => !LEGENDARIES.includes(n));
+  if (finalEvosOnly) filtered = filtered.filter(n => speciesData[n] && speciesData[n].isFinalEvo);
+  return filtered.length >= 6 ? filtered : pool;
+}
+
+// Picks a type that has enough Pokémon in the pool to fill a team, gym-leader style.
+function pickMonoType(pool) {
+  const byType = {};
+  pool.forEach(n => {
+    const sp = speciesData[n];
+    if (!sp) return;
+    [sp.type1, sp.type2].forEach(t => {
+      if (t === undefined || t === null) return;
+      (byType[t] = byType[t] || new Set()).add(n);
+    });
+  });
+  const viable = Object.keys(byType).filter(t => byType[t].size >= 6);
+  if (!viable.length) return null;
+  const type = viable[Math.floor(rng() * viable.length)];
+  return { type: Number(type), pool: Array.from(byType[type]) };
+}
+
+// Levels sit at the cup's floor so a legal 3-Pokémon combination under the level-sum
+// cap always exists, except for species that can't exist that low (Dragonite needs 55).
+function levelForPokemon(name, modeConfig) {
+  if (!modeConfig) return getLevelForMode(currentMode);
+  if (modeConfig.level) return modeConfig.level;
+  const floor = modeConfig.min || modeConfig.fixed || 5;
+  const needed = getMinLegalLevel(name);
+  const level = Math.max(floor, needed);
+  return modeConfig.max ? Math.min(level, modeConfig.max) : level;
+}
+
 function moveKey(move) {
   return String(move).toLowerCase().replace(/\s+/g, "");
 }
@@ -118,8 +207,8 @@ function pickStadiumStyleMoves(name, legal) {
     const pool = arr.filter(m => !picked.includes(m));
     if (!pool.length) return false;
     const strong = pool.filter(isGood);
-    const from = (strong.length && Math.random() < 0.75) ? strong : pool;
-    picked.push(from[Math.floor(Math.random() * from.length)]);
+    const from = (strong.length && rng() < 0.75) ? strong : pool;
+    picked.push(from[Math.floor(rng() * from.length)]);
     return true;
   };
 
@@ -136,14 +225,14 @@ function pickStadiumStyleMoves(name, legal) {
   // 4. Filler, leaning on whichever attacking stat the species actually has
   const prefersPhysical = (sp.attack || 0) >= (sp.spAttack || 0);
   const filler = attacks.filter(m => prefersPhysical ? typeOf(m) < 10 : typeOf(m) >= 20);
-  if (!(Math.random() < 0.5 && take(filler))) {
+  if (!(rng() < 0.5 && take(filler))) {
     take(supports) || take(filler) || take(attacks);
   }
 
   // Top up from anything legal that's left (tiny learnsets like Caterpie's)
   const leftovers = legal.filter(m => !picked.includes(m));
   while (picked.length < 4 && leftovers.length) {
-    picked.push(leftovers.splice(Math.floor(Math.random() * leftovers.length), 1)[0]);
+    picked.push(leftovers.splice(Math.floor(rng() * leftovers.length), 1)[0]);
   }
   while (picked.length < 4) picked.push("Struggle");
   return picked.slice(0, 4);
@@ -177,11 +266,11 @@ const HIDDEN_POWER_TYPES = [
 ];
 
 function randomDv() {
-  return Math.floor(Math.random() * 16); // 0-15
+  return Math.floor(rng() * 16); // 0-15
 }
 
 function randomInRange(min, max) {
-  return min + Math.floor(Math.random() * (max - min + 1));
+  return min + Math.floor(rng() * (max - min + 1));
 }
 
 // Gen 1 has no gender or shininess tied to DVs, so they're free to randomize.
@@ -201,12 +290,12 @@ function pickGen2Dvs(genderRatio, isShiny, wantsFemale) {
     // Shininess is DV-locked in Gen 2 - these three are never negotiable.
     def = 10; spd = 10; spc = 10;
     if (noGenderConstraint) {
-      atk = randomizeIVs ? SHINY_ATK_DV_OPTIONS[Math.floor(Math.random() * SHINY_ATK_DV_OPTIONS.length)] : 15;
+      atk = randomizeIVs ? SHINY_ATK_DV_OPTIONS[Math.floor(rng() * SHINY_ATK_DV_OPTIONS.length)] : 15;
     } else {
       const threshold = genderRatio >> 4;
       const valid = SHINY_ATK_DV_OPTIONS.filter(v => wantsFemale ? v <= threshold : v > threshold);
       if (valid.length) {
-        atk = randomizeIVs ? valid[Math.floor(Math.random() * valid.length)] : (wantsFemale ? Math.max(...valid) : Math.min(...valid));
+        atk = randomizeIVs ? valid[Math.floor(rng() * valid.length)] : (wantsFemale ? Math.max(...valid) : Math.min(...valid));
       } else {
         // This species can't be both shiny and the requested gender via DVs alone
         // (a real Gen 2 constraint, e.g. very low female-ratio species) - keep shininess.
@@ -289,34 +378,36 @@ function getMoveType(move, poke) {
 }
 
 function getRandomLevel() {
-  return Math.floor(Math.random() * 96) + 5; // 5-100 inclusive
+  return Math.floor(rng() * 96) + 5; // 5-100 inclusive
 }
 
 function getLevelForMode(mode) {
   if (mode === 's1Petit' || mode === 's2Petit') {
-    return Math.floor(Math.random() * 6) + 25; // 25-30
+    return Math.floor(rng() * 6) + 25; // 25-30
   }
   if (mode === 's1Pika') {
-    return Math.floor(Math.random() * 6) + 15; // 15-20
+    return Math.floor(rng() * 6) + 15; // 15-20
   }
   if (mode === 's1Poke' || mode === 's2Poke') {
-    return Math.floor(Math.random() * 6) + 50; // 50-55
+    return Math.floor(rng() * 6) + 50; // 50-55
   }
   if (mode === 's1Prime' || mode === 's2Prime') {
     return 100;
   }
   // Default: 5-100
-  return Math.floor(Math.random() * 96) + 5;
+  return Math.floor(rng() * 96) + 5;
 }
 
 function getRandomGender(name) {
-  // Genderless Pokémon (e.g., Magnemite, Voltorb, etc.)
-  const genderless = [
-    'magnemite', 'magneton', 'voltorb', 'electrode', 'staryu', 'starmie', 'ditto', 'porygon', 'articuno', 'zapdos', 'moltres', 'mewtwo', 'mew',
-    'unown', 'wobbuffet', 'lugia', 'hooh', 'celebi'
-  ];
-  if (genderless.includes(name)) return ' | — | ';
-  return Math.random() < 0.5 ? ' | ♂ | ' : ' | ♀ | ';
+  // Gen 2 decides gender from the Attack DV: female when the DV is at or below
+  // (gender ratio >> 4), so rolling against that same chance keeps the card and
+  // the exported save in agreement.
+  const ratio = speciesData[name]?.genderRatio;
+  if (ratio === undefined || ratio === 255) return ' | — | '; // genderless
+  if (ratio === 0) return ' | ♂ | ';   // always male
+  if (ratio === 254) return ' | ♀ | '; // always female
+  const femaleChance = ((ratio >> 4) + 1) / 16;
+  return rng() < femaleChance ? ' | ♀ | ' : ' | ♂ | ';
 }
 
 function getRandomItem(pokemonName) {
@@ -343,7 +434,7 @@ function getRandomItem(pokemonName) {
     if (['Light Ball', 'Lucky Punch', 'Metal Powder', 'Stick', 'Thick Club'].includes(item)) return false;
     return true;
   });
-  return filtered[Math.floor(Math.random() * filtered.length)];
+  return filtered[Math.floor(rng() * filtered.length)];
 }
 
 function renderTeam(team, containerId, showMoves = true) {
@@ -442,7 +533,7 @@ function renderTeam(team, containerId, showMoves = true) {
 function randomSample(arr, n) {
   const copy = arr.slice();
   for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy.slice(0, n);
@@ -594,7 +685,7 @@ function getMoveInheritance(pokemonName, currentMode) {
 function randomSample(arr, n) {
   const copy = arr.slice();
   for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy.slice(0, n);
@@ -698,19 +789,38 @@ function filterPokemonForMode(mode) {
   );
 }
 
+// The level-sum cap applies to the 3 Pokémon you take into battle, not all 6, so a
+// team is valid as long as at least one legal trio exists.
 function isValidLevelSum(levels, maxSum) {
-  const sum = levels.reduce((a, b) => a + b, 0);
-  return sum <= maxSum;
+  for (let i = 0; i < levels.length - 2; i++) {
+    for (let j = i + 1; j < levels.length - 1; j++) {
+      for (let k = j + 1; k < levels.length; k++) {
+        if (levels[i] + levels[j] + levels[k] <= maxSum) return true;
+      }
+    }
+  }
+  return false;
 }
 
 function isShiny() {
   // 1/8192 chance, only in Stadium 2
-  return Math.floor(Math.random() * 50) === 0;
+  return Math.floor(rng() * 50) === 0;
 }
 
 function randomizeFullTeam() {
-  const pool = filterPokemonForMode(currentMode);
-  
+  // A seed left in the box reproduces that exact team; otherwise roll a fresh one
+  const seedInput = document.getElementById('seed-input');
+  const typed = seedInput ? seedInput.value.trim() : '';
+  const seed = typed ? (parseInt(typed, 16) >>> 0) : randomSeed();
+  setSeed(seed);
+  if (seedInput) seedInput.value = seedToText(seed);
+
+  let pool = applyPoolFilters(filterPokemonForMode(currentMode));
+  if (monoTypeTeam) {
+    const mono = pickMonoType(pool);
+    if (mono) pool = mono.pool;
+  }
+
   // Get mode configuration first
   const modeConfig = {
     's1Petit': { min: 25, max: 30, sum: 80, fixed: 26 },
@@ -760,7 +870,7 @@ function randomizeFullTeam() {
         name,
         dex: pokemonData[name].dex,
         moves,
-        level: modeConfig?.fixed || modeConfig?.level || getLevelForMode(currentMode),
+        level: levelForPokemon(name, modeConfig),
         gender,
         item: getRandomItem(name),
         shiny: isShinyPokemon,
@@ -783,7 +893,9 @@ function randomizeFullTeam() {
 
   // Validate level sums for restricted modes
   if (modeConfig?.sum && !isValidLevelSum(team.map(p => p.level), modeConfig.sum)) {
-    team.forEach(p => p.level = modeConfig.fixed);
+    // Last resort: drop everything to the cup floor, still respecting species minimums
+    const floor = modeConfig.min || modeConfig.fixed;
+    team.forEach(p => p.level = Math.max(floor, getMinLegalLevel(p.name)));
   }
 
   currentFixedTeam = team;
@@ -814,7 +926,7 @@ function generateBattleTeam() {
     
     if (validCombinations.length > 0) {
       // Randomly select one valid combination
-      team = validCombinations[Math.floor(Math.random() * validCombinations.length)];
+      team = validCombinations[Math.floor(rng() * validCombinations.length)];
     } else {
       // Fallback: just pick first 3 (should rarely happen with proper level generation)
       team = currentFixedTeam.slice(0,3);
@@ -956,6 +1068,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Stat EXP only affects the exported save, so no re-render needed
     document.getElementById('toggle-random-evs').addEventListener('change', (e) => {
       randomizeEVs = e.target.checked;
+    });
+
+    // Pool filters - these change which Pokémon are eligible, so regenerate
+    [
+      ['toggle-no-legendaries', v => { noLegendaries = v; }],
+      ['toggle-final-evos', v => { finalEvosOnly = v; }],
+      ['toggle-mono-type', v => { monoTypeTeam = v; }]
+    ].forEach(([id, apply]) => {
+      document.getElementById(id).addEventListener('change', (e) => {
+        apply(e.target.checked);
+        if (currentFixedTeam.length > 0) {
+          const seedInput = document.getElementById('seed-input');
+          if (seedInput) seedInput.value = ''; // filters change the pool, so reseed
+          randomizeFullTeam();
+        }
+      });
+    });
+
+    document.getElementById('btn-new-seed').addEventListener('click', () => {
+      document.getElementById('seed-input').value = '';
     });
 
     // Moveset style: re-roll moves on the existing team so the choice can be

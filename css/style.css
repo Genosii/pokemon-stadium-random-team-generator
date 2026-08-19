@@ -856,6 +856,46 @@ footer a{
   align-items: center;
 }
 
+#seed-input {
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 9px 18px;
+  width: 130px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#seed-input::placeholder {
+  color: #777;
+  letter-spacing: 1px;
+}
+
+.seed-btn {
+  background: #333;
+  color: #ccc;
+  border: none;
+  border-radius: 30px;
+  padding: 9px 18px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.seed-btn:hover {
+  background: #444;
+  color: #fff;
+}
+
 /* Moveset style picker */
 .segmented-label {
   align-self: center;

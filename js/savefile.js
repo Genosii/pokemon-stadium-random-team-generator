@@ -108,7 +108,7 @@ const MAX_DVS = { atk: 15, def: 15, spd: 15, spc: 15 };
 // Stat Exp (EV) for a single stat: maxed by default, or randomized 0-65535 per stat
 // independently when the "Randomize EVs" toggle is on.
 function pickStatExp() {
-  return randomizeEVs ? Math.floor(Math.random() * (STAT_EXP_MAX + 1)) : STAT_EXP_MAX;
+  return randomizeEVs ? Math.floor(rng() * (STAT_EXP_MAX + 1)) : STAT_EXP_MAX;
 }
 
 // DVs are rolled when the team is generated (see randomize.js) so that the cards and
@@ -190,7 +190,7 @@ function writeGen1PartyMon(buf, offset, mon, trainerId) {
 
 function buildGen1Save(team) {
   const buf = new Uint8Array(0x8000);
-  const trainerId = Math.floor(Math.random() * 65536);
+  const trainerId = Math.floor(rng() * 65536);
   const trainerName = 'STADIUM';
 
   buf.set(encodeGameText(trainerName, 7), 0x2598);
@@ -308,7 +308,7 @@ function writeGen2PartyMon(buf, offset, mon, trainerId) {
 function buildGen2Save(team, versionKey) {
   const off = GEN2_OFFSETS[versionKey === 'crystal' ? 'crystal' : 'goldsilver'];
   const buf = new Uint8Array(0x8000);
-  const trainerId = Math.floor(Math.random() * 65536);
+  const trainerId = Math.floor(rng() * 65536);
   const trainerName = 'STADIUM';
 
   buf.set(encodeGameText(trainerName, 7), off.playerName);
